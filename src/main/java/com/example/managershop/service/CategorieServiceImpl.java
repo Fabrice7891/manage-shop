@@ -1,6 +1,8 @@
 package com.example.managershop.service;
 
+import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.entities.Categorie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -9,9 +11,14 @@ import java.util.Collection;
 @Service
 @Transactional
 public class CategorieServiceImpl implements CategorieService{
-    @Override
-    public void addCategory(Categorie c) {
 
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Override
+    public Categorie addCategory(Categorie c) {
+             return categoryRepository.save(c);
     }
 
     @Override

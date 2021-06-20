@@ -8,7 +8,7 @@ import java.util.Collection;
 
 
 public interface CategorieService {
-    public void addCategory(Categorie c);
+    public Categorie addCategory(Categorie c);
     public boolean isExistCat(Long idCat);
     public void updateCat(Long idCat, Categorie newCat);
     public void deleteCat(Long idCat);
