@@ -24,4 +24,8 @@ public class Categorie {
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Produit> produits= new ArrayList<>();
 
+    public Categorie(Long idCat, String nomCat) {
+        this.idCat = idCat;
+        this.nomCat = nomCat;
+    }
 }

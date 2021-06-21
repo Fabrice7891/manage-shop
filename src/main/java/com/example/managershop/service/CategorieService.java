@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 
 
 public interface CategorieService {
@@ -12,7 +13,7 @@ public interface CategorieService {
     public boolean isExistCat(Long idCat);
     public void updateCat(Long idCat, Categorie newCat);
     public void deleteCat(Long idCat);
-    public Collection<Categorie> showAllCat();
+    public List<Categorie> showAllCat();
     public Categorie searchCatById(Long id);
     public Collection<Categorie> searchByKeyWord(String keyWord);
 }
