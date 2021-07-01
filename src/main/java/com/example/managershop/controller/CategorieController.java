@@ -19,7 +19,7 @@ public class CategorieController {
     }
 
     @GetMapping("/listCategories")
-    public List<Categorie> getAllCategories(String keyword){
+    public List<Categorie> getAllCategories(@RequestParam String keyword){
         return categorieService.findAll(keyword);
     }
 
