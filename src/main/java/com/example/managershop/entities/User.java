@@ -17,6 +17,8 @@ import java.util.Collection;
 @DiscriminatorValue("USER")
 public class User extends Personne {
     private String password;
+    private String passwordConfirmed;
+    private boolean activated;
     private String photo;
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Collection<Role> roles= new ArrayList<>();

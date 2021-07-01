@@ -1,6 +1,7 @@
-package com.example.managershop.service;
+package com.example.managershop.service.Impl;
 
 import com.example.managershop.entities.Commande;
+import com.example.managershop.service.CommandeService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

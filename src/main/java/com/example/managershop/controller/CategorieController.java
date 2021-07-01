@@ -19,7 +19,9 @@ public class CategorieController {
     }
 
     @GetMapping("/listCategories")
-    public List<Categorie> getAllCategories(){
-        return categorieService.showAllCat();
+    public List<Categorie> getAllCategories(String keyword){
+        return categorieService.findAll(keyword);
     }
+
+
 }

@@ -10,10 +10,13 @@ import java.util.List;
 
 public interface CategorieService {
     public Categorie addCategory(Categorie c);
+
     public boolean isExistCat(Long idCat);
     public void updateCat(Long idCat, Categorie newCat);
     public void deleteCat(Long idCat);
-    public List<Categorie> showAllCat();
+    public List<Categorie> findAll(String keyword);
     public Categorie searchCatById(Long id);
-    public Collection<Categorie> searchByKeyWord(String keyWord);
+
+
+
 }
