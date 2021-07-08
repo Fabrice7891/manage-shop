@@ -17,4 +17,9 @@ public class Role {
     private int levelPriorite;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<User> users= new ArrayList<>();
+
+    public Role(String nameRole, int levelPriorite) {
+        this.nameRole = nameRole;
+        this.levelPriorite = levelPriorite;
+    }
 }

@@ -17,7 +17,7 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCat;
     private String nomCat;
-    private boolean archived=false;
+    private Boolean archived;
     @OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Produit> produits= new ArrayList<>();

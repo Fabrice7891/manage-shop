@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 
 @Service
 @Transactional
@@ -37,6 +38,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role loadRoleById(Long idRole) {
         return roleRepository.findById(idRole).get();
+    }
+
+    @Override
+    public Collection<Role> listRoles() {
+        return roleRepository.findAll();
     }
 
 }

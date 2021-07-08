@@ -23,5 +23,21 @@ public class CategorieController {
         return categorieService.findAll(keyword);
     }
 
+    @GetMapping("/categorie/{id}")
+    public Categorie getCatById(@PathVariable("id") Long idCat){
+        return categorieService.findByIdcat(idCat);
+    }
+
+    @DeleteMapping("/deleteCat/{id}")
+    public void deleteCat(@PathVariable("id") Long idCat){
+        categorieService.deleteCat(idCat);
+    }
+
+    @PutMapping("/UpdateCat/{id}")
+    public void updateCat(@PathVariable("id") Long idCat, @RequestBody Categorie categorie){
+        categorieService.updateCat(idCat,categorie);
+    }
+
+
 
 }

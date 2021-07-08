@@ -29,7 +29,8 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public Categorie addCategory(Categorie c) {
-
+        /*Categorie categorie= findByIdcat(c.getIdCat());
+        if(!categorie.equals(null)) throw new RuntimeException("Category already exist");*/
         return categoryRepository.save(c);
     }
 
@@ -44,7 +45,7 @@ public class CategorieServiceImpl implements CategorieService {
 
             Categorie cat= categoryRepository.findByIdCat(idCat);
             cat.setNomCat(newCat.getNomCat());
-            cat.setArchived(newCat.isArchived());
+            cat.setArchived(newCat.getArchived());
             categoryRepository.save(cat);
     }
 
@@ -56,10 +57,22 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
+    public Categorie deleteCat(Categorie cat) {
+        if(searchCatById1(cat.getIdCat()).equals(null)) throw new RuntimeException("Category not exist");
+        categoryRepository.delete(cat);
+        return cat;
+    }
+
+    @Override
     public List<Categorie> findAll(String keyword) {
         if(keyword!=null){
             return categoryRepository.findAll(keyword);
         }
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Categorie> findAll() {
         return categoryRepository.findAll();
     }
 
@@ -70,8 +83,8 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Optional<Categorie> searchCatById1(Long id) {
-        return categoryRepository.findById(id);  // Comment gerer le Optional?
+    public Categorie searchCatById1(Long id) {
+        return categoryRepository.findById(id).get();  // Comment gerer le Optional?
     }
 
 

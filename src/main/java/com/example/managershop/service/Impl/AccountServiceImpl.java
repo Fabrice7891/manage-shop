@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService
     @Override
     public Role save(Role role) throws RuntimeException{
 
-        if(!roleRepository.findByNameRole(role.getNameRole()).equals(null)) throw new RuntimeException("Role already exist");
+       // if(!roleRepository.findByNameRole(role.getNameRole()).equals(null)) throw new RuntimeException("Role already exist");
         return roleRepository.save(role);
     }
 
@@ -60,13 +60,13 @@ public class AccountServiceImpl implements AccountService
     public void addRoleToUser(String username, String rolename) throws UsernameNotFoundException,RuntimeException {
 
         if(loadUserByUsername(username).equals(null)) throw  new UsernameNotFoundException("Use not exist");
-        if(loadUserByRolename(rolename).equals(null)) throw new RuntimeException("Role not exist");
-        loadUserByUsername(username).getRoles().add(loadUserByRolename(rolename));
+        if(loadRoleByRolename(rolename).equals(null)) throw new RuntimeException("Role not exist");
+        loadUserByUsername(username).getRoles().add(loadRoleByRolename(rolename));
 
     }
 
     @Override
-    public Role loadUserByRolename(String roleName) {
+    public Role loadRoleByRolename(String roleName) {
         return roleRepository.findByNameRole(roleName);
     }
 

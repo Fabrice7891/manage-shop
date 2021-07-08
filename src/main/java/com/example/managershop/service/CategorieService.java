@@ -15,10 +15,12 @@ public interface CategorieService {
     public boolean isExistCat(Long idCat);
     public void updateCat(Long idCat, Categorie newCat);
     public void deleteCat(Long idCat);
+    public Categorie deleteCat(Categorie cat);
     public List<Categorie> findAll(String keyword);
+    public List<Categorie> findAll();
     public Categorie searchCatById(Long id);
 
-    public Optional<Categorie> searchCatById1(Long idcat);
+    public Categorie searchCatById1(Long idcat);
 
 
 }
