@@ -1,9 +1,6 @@
 package com.example.managershop.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -13,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Builder
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 @DiscriminatorValue("CLT")
 public class Client extends Personne{
@@ -24,4 +22,27 @@ public class Client extends Personne{
     //@JoinColumn(name = "id_client1")
     private Collection<Commande> commandes = new ArrayList<>();
 
+   /* public double getSoldeDebit() {
+        return soldeDebit;
+    }
+
+    public double getSoldeCredit() {
+        return soldeCredit;
+    }
+
+    public Collection<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setSoldeDebit(double soldeDebit) {
+        this.soldeDebit = soldeDebit;
+    }
+
+    public void setSoldeCredit(double soldeCredit) {
+        this.soldeCredit = soldeCredit;
+    }
+
+    public void setCommandes(Collection<Commande> commandes) {
+        this.commandes = commandes;
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.example.managershop.entities;
 
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Builder
+@Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class Produit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

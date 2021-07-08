@@ -16,4 +16,5 @@ public interface AccountService {
     public Role save(Role role);
     public User loadUserByUsername( String username);
     public void addRoleToUser (String username , String rolename);
+    public Role loadUserByRolename(String roleName);
 }

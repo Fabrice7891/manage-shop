@@ -1,9 +1,6 @@
 package com.example.managershop.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -13,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Builder
 @Data @NoArgsConstructor @AllArgsConstructor @ToString
 public class Commande {
     @Id

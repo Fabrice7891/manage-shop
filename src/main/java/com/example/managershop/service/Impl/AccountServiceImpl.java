@@ -2,13 +2,17 @@ package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.PersonneRepository;
 import com.example.managershop.dao.RoleRepository;
+import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.Role;
 import com.example.managershop.entities.User;
 import com.example.managershop.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.management.relation.RoleNotFoundException;
 
 
 @Service
@@ -26,64 +30,44 @@ public class AccountServiceImpl implements AccountService
 
     @Override
     public User saveUser(String username, String password, String confirmedPassword) {
-        return null;
-    }
 
-    @Override
-    public Role save(Role role) {
-        return null;
-    }
-
-    @Override
-    public User loadUserByUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public void addRoleToUser(String username, String rolename) {
-
-    }
-
-   /*
-
-
-
-    */
-
-    /*@Override
-    public User saveUser(String username, String password, String confirmedPassword) {
-        Personne user= personneRepository.findByNamePerson(username);
-        if(user!=null) throw  new RuntimeException("User already exist");
+        User user=(User)personneRepository.findByNamePerson(username);
+        if(((User)personneRepository.findByNamePerson(username)).equals(null)) throw new RuntimeException("User already exist");
         if(!password.equals(confirmedPassword)) throw new  RuntimeException("Please confirm your password");
-        User user1 =new User();
+        User user1 = User.builder().build();
+               // new User();
         user1.setNamePerson(username);
         user1.setActivated(true);
         user1.setPassword(bCryptPasswordEncoder.encode(password));
         personneRepository.save(user1);
         addRoleToUser(username, "USER");
-        return (Personne)User;
+        return user1;
     }
 
     @Override
-    public Role save(Role role) {
-        return null;
-    }
+    public Role save(Role role) throws RuntimeException{
 
-    @Override
-    public AppRole save(AppRole role) {
-        return appRoleRepository.save(role);
+        if(!roleRepository.findByNameRole(role.getNameRole()).equals(null)) throw new RuntimeException("Role already exist");
+        return roleRepository.save(role);
     }
 
     @Override
     public User loadUserByUsername(String username) {
-
         return (User)personneRepository.findByNamePerson(username);
     }
 
     @Override
-    public void addRoleToUser(String username, String rolename) {
-       User user=(User)personneRepository.findByNamePerson(username);
-       Role role=roleRepository.findByNameRole(rolename);
-       user.getRoles().add(role);
-    }*/
+    public void addRoleToUser(String username, String rolename) throws UsernameNotFoundException,RuntimeException {
+
+        if(loadUserByUsername(username).equals(null)) throw  new UsernameNotFoundException("Use not exist");
+        if(loadUserByRolename(rolename).equals(null)) throw new RuntimeException("Role not exist");
+        loadUserByUsername(username).getRoles().add(loadUserByRolename(rolename));
+
+    }
+
+    @Override
+    public Role loadUserByRolename(String roleName) {
+        return roleRepository.findByNameRole(roleName);
+    }
+
 }

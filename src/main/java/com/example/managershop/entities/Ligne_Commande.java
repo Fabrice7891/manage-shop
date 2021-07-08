@@ -1,13 +1,11 @@
 package com.example.managershop.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class Ligne_Commande {
     @Id
