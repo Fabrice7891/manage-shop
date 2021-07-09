@@ -17,7 +17,6 @@ import java.util.Collection;
 
 @Service
 public class userDetailsServiceImpl implements UserDetailsService {
-
     @Autowired
     private AccountService accountService;
     @Override
