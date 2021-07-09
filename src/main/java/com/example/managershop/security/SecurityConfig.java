@@ -33,6 +33,7 @@ public class SecurityConfig
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         http.cors().and().csrf().disable();
         http.formLogin().disable()
         .authorizeRequests()
