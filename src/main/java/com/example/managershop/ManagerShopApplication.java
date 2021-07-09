@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Random;
 import java.util.stream.Stream;
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication //(exclude = SecurityAutoConfiguration.class)
 //@EnableSwagger2
 public class ManagerShopApplication //implements CommandLineRunner
 {
@@ -42,7 +42,7 @@ public class ManagerShopApplication //implements CommandLineRunner
 	}*/
 
 	@Bean
-	CommandLineRunner start(AccountService accountService, RoleService roleService){
+	CommandLineRunner start(/*AccountService accountService, RoleService roleService*/){
 		return  args -> {
 
 			/*Stream.of("Role1","Role2","Role3","Role4","Role5").forEach(r->{
@@ -55,13 +55,10 @@ public class ManagerShopApplication //implements CommandLineRunner
 				categorieService.findAll().forEach(cat->{
 					System.out.println(cat.getNomCat());
 
-				/*	roleService.listRoles().forEach(role->{
-				System.out.println(role.getNameRole());*/
 			});
 
 		};
 	}
-
 
 
 	@Bean

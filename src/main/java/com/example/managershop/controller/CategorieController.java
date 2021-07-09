@@ -24,8 +24,11 @@ public class CategorieController {
     }
 
     @GetMapping("/categorie/{id}")
-    public Categorie getCatById(@PathVariable("id") Long idCat){
-        return categorieService.findByIdcat(idCat);
+    public String getCatById(@PathVariable("id") Long idCat){
+
+        Categorie cat= categorieService.findByIdcat(idCat);
+        if(cat==null) return "Category not exist";
+        return cat.toString()+"Deleted !!!";
     }
 
     @DeleteMapping("/deleteCat/{id}")
