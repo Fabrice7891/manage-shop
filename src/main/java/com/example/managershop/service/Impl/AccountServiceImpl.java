@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 
 @Service
@@ -72,6 +73,7 @@ public class AccountServiceImpl implements AccountService
 
     @Override
     public Role loadRoleByRolename(String roleName) {
+        if(ObjectUtils.nullSafeEquals(roleRepository.findByNameRole(roleName), null)) return null;
         return roleRepository.findByNameRole(roleName);
     }
 

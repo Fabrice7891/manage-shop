@@ -6,8 +6,11 @@ import com.example.managershop.exception.CategorieNotFoundException;
 import com.example.managershop.service.CategorieService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,29 +25,34 @@ public class CategorieController {
 
     @PostMapping("/")
     @ApiOperation(value = "Create a Category")
-    public Categorie AddCategorie(@RequestBody Categorie categorie){
-             return categorieService.addCategory(categorie);
+    public ResponseEntity<Categorie> createListing(@Valid @RequestBody Categorie categorie) {
+        return new ResponseEntity<>(categorieService.addCategory(categorie), HttpStatus.CREATED);
     }
+
 
     @GetMapping("/")
-    public List<Categorie> getAllCategories(){
-        return categorieService.findAll();
+    public ResponseEntity<List<Categorie>> getAllCategories() {
+        return new ResponseEntity<>(categorieService.findAll(), HttpStatus.OK);
     }
+
 
     @GetMapping("/{id}")
-    public Categorie getCatById(@PathVariable("id") Long idCat){
-        System.out.println("------------"+categoryRepository.findByIdCat(idCat));
-       return categorieService.findByIdcat(idCat);
-
+    public ResponseEntity<Categorie> getCatById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(categorieService.findByIdcat(id), HttpStatus.OK);
     }
+
+
 
     @DeleteMapping("/{id}")
-    public void deleteCat(@PathVariable("id") Long idCat){
-        categorieService.deleteCat(idCat);
+    public ResponseEntity<String> deleteCat(@PathVariable("id") Long id) {
+        Categorie cat=categorieService.deleteCat(id);
+        return new ResponseEntity<>("Category with id " + id + " deleted successfully !", HttpStatus.OK);
     }
 
+
     @PutMapping("/{id}")
-    public void updateCat(@PathVariable("id") Long idCat, @RequestBody Categorie categorie) throws CategorieNotFoundException {
-        categorieService.updateCat(idCat,categorie);
+    public ResponseEntity<Categorie> updateCat(@PathVariable("id") Long id, @Valid @RequestBody Categorie newCat) throws CategorieNotFoundException {
+        return new ResponseEntity<>(categorieService.updateCat(id, newCat), HttpStatus.OK);
     }
+
 }

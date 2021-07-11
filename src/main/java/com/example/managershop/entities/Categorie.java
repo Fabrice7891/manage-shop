@@ -5,6 +5,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,6 +17,9 @@ public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCat;
+   // @NotBlank(message = "Name is mandatory")
+    //@Column(length=50)
+    //@Size(max = 30 , min = 8)
     private String nomCat;
     private Boolean archived;
     @OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)

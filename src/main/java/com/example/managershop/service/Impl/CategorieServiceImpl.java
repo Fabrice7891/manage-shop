@@ -2,12 +2,12 @@ package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.entities.Categorie;
+import com.example.managershop.entities.Produit;
 import com.example.managershop.exception.CategorieNotFoundException;
 import com.example.managershop.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -31,8 +31,7 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public Categorie addCategory(Categorie c) {
-        /*Categorie categorie= findByIdcat(c.getIdCat());
-        if(!categorie.equals(null)) throw new RuntimeException("Category already exist");*/
+        if(ObjectUtils.nullSafeEquals(c, null)) {return null;}
         return categoryRepository.save(c);
     }
 
@@ -42,34 +41,22 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public void updateCat(Long idCat, Categorie newCat) throws CategorieNotFoundException {
-        if(ObjectUtils.nullSafeEquals(newCat,null)) return;
-        if(!isExistCat(idCat)) throw new CategorieNotFoundException("Categorie Not Found");
-            Categorie cat= categoryRepository.findByIdCat(idCat);
-            if(ObjectUtils.isEmpty(cat)) throw new CategorieNotFoundException("Categorie Not Found");
-            cat.setNomCat(newCat.getNomCat());
-            cat.setArchived(newCat.getArchived());
-            categoryRepository.save(cat);
+    public Categorie updateCat(Long idCat, Categorie newCat) {
+        if(ObjectUtils.nullSafeEquals(newCat,null)) return null;
+        findByIdcat(idCat).setNomCat(newCat.getNomCat());
+        findByIdcat(idCat).setArchived(newCat.getArchived());
+        return categoryRepository.save(findByIdcat(idCat));
 
     }
 
     @Override
-    public void deleteCat(Long idCat) {
-        if(ObjectUtils.nullSafeEquals(searchCatById1(idCat),null)) return ;
-        categoryRepository.delete(searchCatById1(idCat));
-        /*return cat;
-        if(!isExistCat(idCat)) throw new RuntimeException("Categorie introuvable");
-        categoryRepository.deleteById(idCat);*/
+    public Categorie deleteCat(Long idCat) {
+        Categorie categorie=findByIdcat(idCat);
+        categoryRepository.delete(findByIdcat(idCat));
+        return categorie;
 
     }
 
-    @Override
-    public Categorie deleteCat(Categorie cat) {
-        if(ObjectUtils.nullSafeEquals(cat, null)) { return null;}
-        if(ObjectUtils.nullSafeEquals(searchCatById1(cat.getIdCat()),null)) throw new RuntimeException("Category not exist");
-        categoryRepository.delete(cat);
-        return cat;
-    }
 
     @Override
     public List<Categorie> findAll(String keyword) {
@@ -96,5 +83,20 @@ public class CategorieServiceImpl implements CategorieService {
            return categoryRepository.findById(id).get();
         else return null;
     }
-    
+
+    @Override
+    public Categorie addProductToCategorie(Long idPdt, Long idCat) {
+        return null;
+    }
+
+    @Override
+    public Categorie deleteProductToCategorie(Long idPdt, Long idCat) {
+        return null;
+    }
+
+    @Override
+    public Categorie deleteProductToCategorie(List<Produit> produits, Long idCat) {
+        return null;
+    }
+
 }
