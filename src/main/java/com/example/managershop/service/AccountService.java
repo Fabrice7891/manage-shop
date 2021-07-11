@@ -1,6 +1,5 @@
 package com.example.managershop.service;
 
-import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.Role;
 import com.example.managershop.entities.User;
 

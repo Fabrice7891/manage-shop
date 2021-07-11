@@ -2,7 +2,6 @@ package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.RoleRepository;
 import com.example.managershop.entities.Role;
-import com.example.managershop.entities.User;
 import com.example.managershop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

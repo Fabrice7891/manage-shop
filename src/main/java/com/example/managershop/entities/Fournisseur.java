@@ -1,9 +1,6 @@
 package com.example.managershop.entities;
 
 import lombok.*;
-import net.bytebuddy.build.ToStringPlugin;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;

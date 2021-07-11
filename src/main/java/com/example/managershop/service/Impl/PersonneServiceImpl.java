@@ -2,7 +2,6 @@ package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.PersonneRepository;
 import com.example.managershop.entities.Client;
-import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.User;
 import com.example.managershop.service.PersonneService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -12,8 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.relation.RoleNotFoundException;
-
 
 @Service
 @Transactional
@@ -39,6 +37,8 @@ public class AccountServiceImpl implements AccountService
         user1.setNamePerson(username);
         user1.setActivated(true);
         user1.setPassword(bCryptPasswordEncoder.encode(password));
+
+        //User user1 = User.builder.namePerson(username).activated(true).password(bCryptPasswordEncoder.encode(password)).build();
         personneRepository.save(user1);
         addRoleToUser(username, "USER");
         return user1;
@@ -53,7 +53,11 @@ public class AccountServiceImpl implements AccountService
 
     @Override
     public User loadUserByUsername(String username) {
-        return (User)personneRepository.findByNamePerson(username);
+        User user = null;
+        if(personneRepository.findByNamePerson(username) instanceof Personne) {
+             user=(User) personneRepository.findByNamePerson(username);
+        }
+        return  user;
     }
 
     @Override
@@ -61,6 +65,7 @@ public class AccountServiceImpl implements AccountService
 
         if(loadUserByUsername(username).equals(null)) throw  new UsernameNotFoundException("Use not exist");
         if(loadRoleByRolename(rolename).equals(null)) throw new RuntimeException("Role not exist");
+        if(loadUserByUsername(username).equals(null)) throw new RuntimeException("Nul pointer");
         loadUserByUsername(username).getRoles().add(loadRoleByRolename(rolename));
 
     }
