@@ -3,6 +3,8 @@ package com.example.managershop.service;
 import com.example.managershop.entities.Role;
 import com.example.managershop.entities.User;
 
+import java.util.List;
+
 
 public interface AccountService {
 
@@ -13,7 +15,11 @@ public interface AccountService {
      * @return
      */
     public Role save(Role role);
+
+
     public User loadUserByUsername( String username);
     public void addRoleToUser (String username , String rolename);
     public Role loadRoleByRolename(String roleName);
+    public User addRoleToUser(Long idUser, Long idRole);
+
 }

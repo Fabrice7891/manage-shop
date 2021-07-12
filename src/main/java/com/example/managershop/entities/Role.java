@@ -3,6 +3,8 @@ package com.example.managershop.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,6 +15,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRole;
+    @NotNull
     private String nameRole;
     private int levelPriorite;
     @ManyToMany(fetch = FetchType.EAGER)

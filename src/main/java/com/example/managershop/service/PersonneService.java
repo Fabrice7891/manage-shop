@@ -2,15 +2,20 @@ package com.example.managershop.service;
 
 
 import com.example.managershop.entities.Client;
+import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.User;
+
+import java.util.List;
 
 public interface PersonneService {
 
-    public void saveClient(Client c);
-    public void updateClient(String clientName , Client newClient);
+    public Client saveClient(Client c);
+    public User saveUser(User u);
+    public Client updateClient(String clientName , Client newClient);
     public Client loadClientByUsername(String username);
-    public void deleteCleint(Client c);
-    public void updateUser(Long idUser , User newUser);
-    public void deleteUser(Long idUser);
+    public Client deleteCleint(Client c);
+    public User updateUser(Long idUser , User newUser);
+    public User deleteUser(Long idUser);
     public User loadUserByid(Long idUser);
+    public List<Personne> getAllUser();
 }

@@ -12,7 +12,7 @@ public interface CategorieService {
     public Categorie addCategory(Categorie c);
     public boolean isExistCat(Long idCat);
     public Categorie updateCat(Long idCat, Categorie newCat) throws CategorieNotFoundException;
-    public Categorie deleteCat(Long idCat);
+    public Categorie deleteCat(Long idCat) throws CategorieNotFoundException;
     public List<Categorie> findAll(String keyword);
     public List<Categorie> findAll();
     public Categorie searchCatById(Long id);

@@ -25,7 +25,7 @@ public class CategorieController {
 
     @PostMapping("/")
     @ApiOperation(value = "Create a Category")
-    public ResponseEntity<Categorie> createListing(@Valid @RequestBody Categorie categorie) {
+    public ResponseEntity<Categorie> createCategorie(@Valid @RequestBody Categorie categorie) {
         return new ResponseEntity<>(categorieService.addCategory(categorie), HttpStatus.CREATED);
     }
 
@@ -44,9 +44,8 @@ public class CategorieController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCat(@PathVariable("id") Long id) {
-        Categorie cat=categorieService.deleteCat(id);
-        return new ResponseEntity<>("Category with id " + id + " deleted successfully !", HttpStatus.OK);
+    public ResponseEntity<Categorie> deleteCat(@PathVariable("id") Long id) throws CategorieNotFoundException {
+        return new ResponseEntity<>(categorieService.deleteCat(id), HttpStatus.OK);
     }
 
 

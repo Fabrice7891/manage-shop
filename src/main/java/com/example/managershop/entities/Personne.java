@@ -15,6 +15,7 @@ public abstract class Personne implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPerson;
     private String civilitePerson;
+    @Column(unique = true)
     private String namePerson;
     private String lastNamePerson;
     private String emailPerson;

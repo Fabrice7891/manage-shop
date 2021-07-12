@@ -2,12 +2,15 @@ package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.PersonneRepository;
 import com.example.managershop.entities.Client;
+import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.User;
 import com.example.managershop.service.PersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,13 +19,21 @@ public class PersonneServiceImpl implements PersonneService {
     @Autowired
     private PersonneRepository personneRepository;
     @Override
-    public void saveClient(Client c) {
+    public Client saveClient(Client c) {
         if(!loadClientByUsername(c.getLastNamePerson()).equals(null)) throw new RuntimeException("Client already exist !!");
-        personneRepository.save(c);
+        return personneRepository.save(c);
+    }
+
+
+
+    @Override
+    public User saveUser(User u) {
+        if (ObjectUtils.nullSafeEquals(u, null)) return null;
+        return (User)personneRepository.save(u);
     }
 
     @Override
-    public void updateClient(String clientName, Client newClient) {
+    public Client updateClient(String clientName, Client newClient) {
         Client client=(Client)personneRepository.findByNamePerson(clientName);
           if(client.equals(null)) throw new RuntimeException("Client not exist");
           client.setCivilitePerson(newClient.getCivilitePerson());
@@ -34,7 +45,7 @@ public class PersonneServiceImpl implements PersonneService {
           client.setSoldeCredit(newClient.getSoldeCredit());
           client.setSoldeDebit(newClient.getSoldeDebit());
           client.setCommandes(newClient.getCommandes());
-          personneRepository.save(client);
+          return personneRepository.save(client);
     }
 
     @Override
@@ -43,13 +54,14 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public void deleteCleint(Client c) {
+    public Client deleteCleint(Client c) {
           if(loadClientByUsername(c.getLastNamePerson()).equals(null)) throw new RuntimeException("Client not found");
           personneRepository.delete(c);
+        return c;
     }
 
     @Override
-    public void updateUser(Long idUser, User newUser) {
+    public User updateUser(Long idUser, User newUser) {
         User user= loadUserByid(idUser);
         if(user.equals(null)) throw new RuntimeException("user not exist");
         user.setCivilitePerson(newUser.getCivilitePerson());
@@ -61,17 +73,24 @@ public class PersonneServiceImpl implements PersonneService {
         if(newUser.getPassword().equals(newUser.getPasswordConfirmed())) throw new RuntimeException("Please Confirme your passWord");
         user.setPassword(newUser.getPassword());
         user.setPhoto(newUser.getPhoto());
-        personneRepository.save(user);
+        return personneRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Long idUser) {
+    public User deleteUser(Long idUser) {
+        User user=loadUserByid(idUser);
         if(loadUserByid(idUser).equals(null)) throw new RuntimeException("User not found");
-        personneRepository.delete(loadUserByid(idUser));
+         personneRepository.delete(loadUserByid(idUser));
+         return user;
     }
 
     @Override
     public User loadUserByid(Long idUser) {
         return (User)personneRepository.findById(idUser).get();
+    }
+
+    @Override
+    public List<Personne> getAllUser() {
+        return personneRepository.findAll();
     }
 }

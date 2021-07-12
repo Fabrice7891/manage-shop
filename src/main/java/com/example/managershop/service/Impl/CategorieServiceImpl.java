@@ -42,7 +42,10 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public Categorie updateCat(Long idCat, Categorie newCat) {
-        if(ObjectUtils.nullSafeEquals(newCat,null)) return null;
+        if(ObjectUtils.nullSafeEquals(findByIdcat(idCat),null)) return null;
+        if(ObjectUtils.nullSafeEquals(newCat,null)){
+            return categoryRepository.findById(idCat).get();
+        }
         findByIdcat(idCat).setNomCat(newCat.getNomCat());
         findByIdcat(idCat).setArchived(newCat.getArchived());
         return categoryRepository.save(findByIdcat(idCat));
@@ -50,11 +53,11 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Categorie deleteCat(Long idCat) {
-        Categorie categorie=findByIdcat(idCat);
+    public Categorie deleteCat(Long idCat){
+        if(!categoryRepository.findById(idCat).isPresent()) return null;
+        Categorie cate = categoryRepository.findById(idCat).get();
         categoryRepository.delete(findByIdcat(idCat));
-        return categorie;
-
+        return cate;
     }
 
 

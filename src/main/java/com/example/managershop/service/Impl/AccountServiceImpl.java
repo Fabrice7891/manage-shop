@@ -11,7 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 
 @Service
@@ -46,27 +49,28 @@ public class AccountServiceImpl implements AccountService
     }
 
     @Override
-    public Role save(Role role) throws RuntimeException{
-
-       // if(!roleRepository.findByNameRole(role.getNameRole()).equals(null)) throw new RuntimeException("Role already exist");
+    public Role save(Role role){
+        if(ObjectUtils.nullSafeEquals(role,null)) return null;
         return roleRepository.save(role);
     }
 
     @Override
     public User loadUserByUsername(String username) {
-        User user = null;
-        if(personneRepository.findByNamePerson(username) instanceof Personne) {
-             user=(User) personneRepository.findByNamePerson(username);
-        }
-        return  user;
+        if(ObjectUtils.nullSafeEquals(personneRepository.findByNamePerson(username),null)) return null;
+        User user=null;
+        if(personneRepository.findByNamePerson(username) instanceof User) user=(User) personneRepository.findByNamePerson(username);
+        return user;
     }
 
     @Override
     public void addRoleToUser(String username, String rolename) throws UsernameNotFoundException,RuntimeException {
 
-        if(loadUserByUsername(username).equals(null)) throw  new UsernameNotFoundException("Use not exist");
+        /*if(loadUserByUsername(username).equals(null)) throw  new UsernameNotFoundException("Use not exist");
         if(loadRoleByRolename(rolename).equals(null)) throw new RuntimeException("Role not exist");
-        if(loadUserByUsername(username).equals(null)) throw new RuntimeException("Nul pointer");
+        if(loadUserByUsername(username).equals(null)) throw new RuntimeException("Nul pointer");*/
+        /*loadUserByUsername(username);
+        loadRoleByRolename(rolename);*/
+        if(CollectionUtils.isEmpty(loadUserByUsername(username).getRoles())) return;
         loadUserByUsername(username).getRoles().add(loadRoleByRolename(rolename));
 
     }
@@ -76,5 +80,14 @@ public class AccountServiceImpl implements AccountService
         if(ObjectUtils.nullSafeEquals(roleRepository.findByNameRole(roleName), null)) return null;
         return roleRepository.findByNameRole(roleName);
     }
+
+    @Override
+    public User addRoleToUser(Long idUser, Long idRole) {
+        if(!personneRepository.findById(idUser).isPresent()) return null;
+        if(CollectionUtils.isEmpty(((User)personneRepository.findById(idUser).get()).getRoles())) return null;
+        ((User)personneRepository.findById(idUser).get()).getRoles().add(roleRepository.findById(idRole).get());
+        return (User)personneRepository.findById(idUser).get();
+    }
+
 
 }
