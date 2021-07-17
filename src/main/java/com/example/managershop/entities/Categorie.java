@@ -21,7 +21,8 @@ public class Categorie {
     //@Column(length=50)
     //@Size(max = 30 , min = 8)
     private String nomCat;
-    private Boolean archived;
+    //@Column(columnDefinition = "boolean default false")
+    private Boolean archived=false;
     @OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Produit> produits= new ArrayList<>();

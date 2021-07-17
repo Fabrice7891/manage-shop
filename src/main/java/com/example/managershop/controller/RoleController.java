@@ -1,8 +1,7 @@
 package com.example.managershop.controller;
 
-import com.example.managershop.dto.Map.MapCategorie;
+import com.example.managershop.dto.Map.MapAll;
 import com.example.managershop.dto.RoleDto;
-import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Role;
 import com.example.managershop.service.AccountService;
 import com.example.managershop.service.RoleService;
@@ -25,7 +24,7 @@ public class RoleController {
     @Autowired
     private AccountService accountService;
     @Autowired
-    private MapCategorie mapCategorie;
+    private MapAll mapAll;
 
     @GetMapping("/roles")
     public Collection<Role> getAllRoles(){
@@ -43,7 +42,7 @@ public class RoleController {
     @PostMapping("/role")
     public Role saveRole(@Valid @RequestBody RoleDto roleDto){
         if(ObjectUtils.nullSafeEquals(roleDto, null)) return  null;
-        return accountService.save(mapCategorie.roleDtoTorole(roleDto));
+        return accountService.save(mapAll.roleDtoTorole(roleDto));
     }
 
 

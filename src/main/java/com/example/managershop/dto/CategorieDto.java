@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,8 +23,9 @@ public class CategorieDto {
     // @NotBlank(message = "Name is mandatory")
     //@Column(length=50)
     //@Size(max = 30 , min = 8)
+    //@NotNull
     private String nomCat;
-    private Boolean archived;
+    private Boolean archived=false;
     private Collection<Produit> produits= new ArrayList<>();
 
 }

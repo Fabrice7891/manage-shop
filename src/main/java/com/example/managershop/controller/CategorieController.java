@@ -2,7 +2,7 @@ package com.example.managershop.controller;
 
 import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.dto.CategorieDto;
-import com.example.managershop.dto.Map.MapCategorie;
+import com.example.managershop.dto.Map.MapAll;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.exception.CategorieNotFoundException;
 import com.example.managershop.exception.NullException;
@@ -27,7 +27,7 @@ public class CategorieController {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private MapCategorie mapCategorie;
+    private MapAll mapAll;
 
     /*@PostMapping("/")
     @ApiOperation(value = "Create a Category")
@@ -35,18 +35,18 @@ public class CategorieController {
         return new ResponseEntity<>(categorieService.addCategory(categorie), HttpStatus.CREATED);
     }*/
 
-   /* @PostMapping("/")
+    @PostMapping("/")
     @ApiOperation(value = "Create a Category")
     public ResponseEntity<Categorie> createCategorieDTO(@Valid @RequestBody CategorieDto categorieDto) throws NullException {
-        return new ResponseEntity<>(categorieService.addCategory(mapCategorie.categorieDtoToCategorie(categorieDto)), HttpStatus.CREATED);
-    }*/
+        return new ResponseEntity<>(categorieService.addCategory(mapAll.categorieDtoToCategorie(categorieDto)), HttpStatus.CREATED);
+    }
 
 
-    @PostMapping("/")
+    /*@PostMapping("/")
     @ApiOperation(value = "Create a Category")
     public Categorie createCategorie(@Valid @RequestBody Categorie categorie) throws NullException {
         return categorieService.addCategory(categorie);
-    }
+    }*/
 
 
     @GetMapping("/")

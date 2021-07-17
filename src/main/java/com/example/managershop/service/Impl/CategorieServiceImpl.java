@@ -40,7 +40,7 @@ public class CategorieServiceImpl implements CategorieService {
     @Override
     public Categorie addCategory(Categorie c) throws NullException {
         //if(ObjectUtils.nullSafeEquals(c, null)) throw new NullException("Categorie is empty");
-        if(ObjectUtils.nullSafeEquals(c, null)) {throw new NullException("Categorie should be not empty");}
+        if(c.getNomCat().equals(null)) {throw new NullException("Categorie should be not empty");}
         return this.categoryRepository.save(c);
     }
 

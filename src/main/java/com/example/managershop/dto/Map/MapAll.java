@@ -7,7 +7,7 @@ import com.example.managershop.entities.Role;
 import org.springframework.stereotype.Repository;
 
 
-public interface MapCategorie {
+public interface MapAll {
 
     public Categorie categorieDtoToCategorie(CategorieDto categorieDto);
     public CategorieDto categorieToCategorieDt(Categorie categorie);
