@@ -21,5 +21,7 @@ public interface AccountService {
     public void addRoleToUser (String username , String rolename);
     public Role loadRoleByRolename(String roleName);
     public User addRoleToUser(Long idUser, Long idRole);
+    public boolean VerifyIfUserHaveRole(Long idUser, Long idRole);
+    public User moveRoleToUser(Long idUser, Long idRole);
 
 }

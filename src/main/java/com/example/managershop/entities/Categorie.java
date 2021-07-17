@@ -30,4 +30,8 @@ public class Categorie {
         this.idCat = idCat;
         this.nomCat = nomCat;
     }
+
+    public Categorie(String nomCat) {
+        this.nomCat = nomCat;
+    }
 }

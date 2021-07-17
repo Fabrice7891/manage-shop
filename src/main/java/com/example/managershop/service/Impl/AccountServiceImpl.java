@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 @Service
@@ -83,10 +85,34 @@ public class AccountServiceImpl implements AccountService
 
     @Override
     public User addRoleToUser(Long idUser, Long idRole) {
-        if(!personneRepository.findById(idUser).isPresent()) return null;
-        if(CollectionUtils.isEmpty(((User)personneRepository.findById(idUser).get()).getRoles())) return null;
+        //if(!personneRepository.findById(idUser).isPresent()) return null;
+        //if(CollectionUtils.isEmpty(((User)personneRepository.findById(idUser).get()).getRoles())) return null;
         ((User)personneRepository.findById(idUser).get()).getRoles().add(roleRepository.findById(idRole).get());
         return (User)personneRepository.findById(idUser).get();
+    }
+
+    @Override
+    public boolean VerifyIfUserHaveRole(Long idUser, Long idRole) {
+        boolean test=false;
+        User user = (User) personneRepository.findById(idUser).get();
+        Role role = roleRepository.findById(idRole).get();
+        Collection<Role> roles = user.getRoles();
+        for (Role r : roles) {
+            if (ObjectUtils.nullSafeEquals(r, role)) {
+              //  roles.remove(r);
+                test= true;
+            }
+        }
+        return test;
+    }
+
+    @Override
+    public User moveRoleToUser(Long idUser, Long idRole) {
+        User user = (User) personneRepository.findById(idUser).get();
+        Role role = roleRepository.findById(idRole).get();
+        if(VerifyIfUserHaveRole(idUser, idRole)== false) return  null;
+        user.getRoles().remove(role);
+        return user;
     }
 
 

@@ -39,8 +39,14 @@ public class UserController {
         return new ResponseEntity<>(accountService.addRoleToUser(idUser,idRole), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{idUser}/{idRole}")
+    @ApiOperation(value = "Move role to User")
+    public ResponseEntity<User> moveRoleToUser(@PathVariable("idUser") Long idUser, @PathVariable("idRole") Long idRole) {
+        return new ResponseEntity<>(accountService.moveRoleToUser(idUser,idRole), HttpStatus.OK);
+    }
+
     @GetMapping("/")
-    public ResponseEntity<List<Personne>> getAllCategories() {
+    public ResponseEntity<List<Personne>> getAllUsers() {
         return new ResponseEntity<>(personneService.getAllUser(), HttpStatus.OK);
     }
 

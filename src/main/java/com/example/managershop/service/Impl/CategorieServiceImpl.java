@@ -4,6 +4,8 @@ import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Produit;
 import com.example.managershop.exception.CategorieNotFoundException;
+import com.example.managershop.exception.NullException;
+import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,16 +25,23 @@ public class CategorieServiceImpl implements CategorieService {
     private CategoryRepository categoryRepository ;
 
 
-    @Override
+   /* @Override
     public Categorie findByIdcat(Long idcat) {
         if(ObjectUtils.nullSafeEquals(categoryRepository.findByIdCat(idcat),null)) return null;
+        return categoryRepository.findById(idcat).get();
+    }*/
+
+    @Override
+    public Categorie findByIdcat(Long idcat) throws RessourseNotFounfException {
+        if(ObjectUtils.nullSafeEquals(categoryRepository.findByIdCat(idcat),null)) throw  new RessourseNotFounfException("Categorie with id :"+idcat+" Not found");
         return categoryRepository.findById(idcat).get();
     }
 
     @Override
-    public Categorie addCategory(Categorie c) {
-        if(ObjectUtils.nullSafeEquals(c, null)) {return null;}
-        return categoryRepository.save(c);
+    public Categorie addCategory(Categorie c) throws NullException {
+        //if(ObjectUtils.nullSafeEquals(c, null)) throw new NullException("Categorie is empty");
+        if(ObjectUtils.nullSafeEquals(c, null)) {throw new NullException("Categorie should be not empty");}
+        return this.categoryRepository.save(c);
     }
 
     @Override
@@ -41,7 +50,7 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Categorie updateCat(Long idCat, Categorie newCat) {
+    public Categorie updateCat(Long idCat, Categorie newCat) throws RessourseNotFounfException {
         if(ObjectUtils.nullSafeEquals(findByIdcat(idCat),null)) return null;
         if(ObjectUtils.nullSafeEquals(newCat,null)){
             return categoryRepository.findById(idCat).get();
@@ -53,7 +62,7 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Categorie deleteCat(Long idCat){
+    public Categorie deleteCat(Long idCat) throws RessourseNotFounfException {
         if(!categoryRepository.findById(idCat).isPresent()) return null;
         Categorie cate = categoryRepository.findById(idCat).get();
         categoryRepository.delete(findByIdcat(idCat));

@@ -1,7 +1,9 @@
 package com.example.managershop.service.Impl;
 
+import com.example.managershop.dao.PersonneRepository;
 import com.example.managershop.dao.RoleRepository;
 import com.example.managershop.entities.Role;
+import com.example.managershop.entities.User;
 import com.example.managershop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private PersonneRepository personneRepository;
     @Override
     public Role updateRole(Long idRole, Role newRole) {
 
@@ -42,6 +47,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Collection<Role> listRoles() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Collection<Role> allRoleUser(Long idUser) {
+        return ((User)personneRepository.findById(idUser).get()).getRoles();
     }
 
 }

@@ -11,4 +11,5 @@ public interface RoleService {
     public String deleteRole(Role role);
     public Role loadRoleById(Long idRole);
     public Collection<Role> listRoles();
+    public Collection<Role> allRoleUser(Long idUser);
 }

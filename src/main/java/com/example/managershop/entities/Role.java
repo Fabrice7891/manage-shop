@@ -1,5 +1,6 @@
 package com.example.managershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Role {
     private String nameRole;
     private int levelPriorite;
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Collection<User> users= new ArrayList<>();
 
     public Role(String nameRole, int levelPriorite) {

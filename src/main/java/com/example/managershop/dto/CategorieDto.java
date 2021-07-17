@@ -1,8 +1,29 @@
 
 package com.example.managershop.dto;
 
-import lombok.Data;
+import com.example.managershop.entities.Produit;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 public class CategorieDto {
+
+
+    private Long idCat;
+    // @NotBlank(message = "Name is mandatory")
+    //@Column(length=50)
+    //@Size(max = 30 , min = 8)
+    private String nomCat;
+    private Boolean archived;
+    private Collection<Produit> produits= new ArrayList<>();
+
 }

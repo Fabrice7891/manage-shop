@@ -1,8 +1,10 @@
 package com.example.managershop;
 
 import com.example.managershop.entities.Categorie;
+import com.example.managershop.exception.NullException;
 import com.example.managershop.service.CategorieService;
 import com.example.managershop.service.RoleService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +23,8 @@ public class ManagerShopApplication //implements CommandLineRunner
 	private CategorieService categorieService;
 	@Autowired
 	private RoleService roleService;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(ManagerShopApplication.class, args);
 	}
@@ -44,12 +48,17 @@ public class ManagerShopApplication //implements CommandLineRunner
 				    accountService.save(Role.builder().nameRole(r).levelPriorite((int)(Math.random() * 6)).build());
 */
 				Stream.of("Categorie1","Categorie2","Categorie3","Categorie4","Categorie5","Categorie6").forEach(c->{
-					categorieService.addCategory(Categorie.builder().nomCat(c).archived(false).build());
-			});
+					try {
+						categorieService.addCategory(Categorie.builder().nomCat(c).archived(false).build());
+					} catch (NullException e) {
+						e.printStackTrace();
+					}
+				});
 
 				categorieService.findAll().forEach(cat->{
 					System.out.println(cat.getNomCat());
 
+					//System.out.println(mapEntityToDto.CategorieToCategorieDTO(new Categorie("test")).toString());
 			});
 
 		};
@@ -59,5 +68,10 @@ public class ManagerShopApplication //implements CommandLineRunner
 	@Bean
 	public BCryptPasswordEncoder getBCPE(){  // crypte les mdp
 		return  new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public ModelMapper mapper(){
+		return  new ModelMapper();
 	}
 }
