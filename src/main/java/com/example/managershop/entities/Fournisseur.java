@@ -1,17 +1,12 @@
 package com.example.managershop.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import net.bytebuddy.build.ToStringPlugin;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 @Entity
+@Builder
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class Fournisseur {
     @Id

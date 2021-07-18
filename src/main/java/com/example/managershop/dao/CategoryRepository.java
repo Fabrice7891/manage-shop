@@ -11,6 +11,7 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Categorie, Long> {
 
     public Categorie findByIdCat(Long idCat);
+
     @Query("SELECT c FROM Categorie c WHERE c.nomCat LIKE %?1%")
-    public List<Categorie> findCatByKeyWord(String keyword);
+    public List<Categorie> findAll(String keyword);
 }

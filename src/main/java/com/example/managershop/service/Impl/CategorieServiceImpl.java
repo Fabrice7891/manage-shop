@@ -2,54 +2,84 @@ package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.entities.Categorie;
+import com.example.managershop.entities.Produit;
+import com.example.managershop.exception.CategorieNotFoundException;
+import com.example.managershop.exception.NullException;
+import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class CategorieServiceImpl implements CategorieService {
 
+    @Autowired
+    private CategorieService categorieService ;
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository ;
+
+
+   /* @Override
+    public Categorie findByIdcat(Long idcat) {
+        if(ObjectUtils.nullSafeEquals(categoryRepository.findByIdCat(idcat),null)) return null;
+        return categoryRepository.findById(idcat).get();
+    }*/
 
     @Override
-    public Categorie addCategory(Categorie c) {
-             return categoryRepository.save(c);
+    public Categorie findByIdcat(Long idcat) throws RessourseNotFounfException {
+        if(ObjectUtils.nullSafeEquals(categoryRepository.findByIdCat(idcat),null)) throw  new RessourseNotFounfException("Categorie with id :"+idcat+" Not found");
+        return categoryRepository.findById(idcat).get();
+    }
+
+    @Override
+    public Categorie addCategory(Categorie c) throws NullException {
+        //if(ObjectUtils.nullSafeEquals(c, null)) throw new NullException("Categorie is empty");
+        if(c.getNomCat().equals(null)) {throw new NullException("Categorie should be not empty");}
+        return this.categoryRepository.save(c);
     }
 
     @Override
     public boolean isExistCat(Long idCat) {
-        return categoryRepository.findById(idCat).isPresent();
+        return categoryRepository.existsById(idCat);
     }
 
     @Override
-    public void updateCat(Long idCat, Categorie newCat) {
-        if(!isExistCat(idCat)) throw new RuntimeException("Categorie introuvable");
+    public Categorie updateCat(Long idCat, Categorie newCat) throws RessourseNotFounfException {
+        if(ObjectUtils.nullSafeEquals(findByIdcat(idCat),null)) return null;
+        if(ObjectUtils.nullSafeEquals(newCat,null)){
+            return categoryRepository.findById(idCat).get();
+        }
+        findByIdcat(idCat).setNomCat(newCat.getNomCat());
+        findByIdcat(idCat).setArchived(newCat.getArchived());
+        return categoryRepository.save(findByIdcat(idCat));
 
-           Categorie cat= categoryRepository.findByIdCat(idCat);
-            cat.setNomCat(newCat.getNomCat());
-            cat.setArchived(newCat.isArchived());
-            categoryRepository.save(cat);
     }
 
     @Override
-    public void deleteCat(Long idCat) {
-        if(!isExistCat(idCat)) throw new RuntimeException("Categorie introuvable");
-        categoryRepository.delete(categoryRepository.findByIdCat(idCat));
+    public Categorie deleteCat(Long idCat) throws RessourseNotFounfException {
+        if(!categoryRepository.findById(idCat).isPresent()) return null;
+        Categorie cate = categoryRepository.findById(idCat).get();
+        categoryRepository.delete(findByIdcat(idCat));
+        return cate;
     }
+
 
     @Override
     public List<Categorie> findAll(String keyword) {
-        if(keyword!=null){
-            return categoryRepository.findCatByKeyWord(keyword);
+        if(keyword!=""){
+            return categoryRepository.findAll(keyword);
         }
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Categorie> findAll() {
         return categoryRepository.findAll();
     }
 
@@ -59,5 +89,26 @@ public class CategorieServiceImpl implements CategorieService {
         return categoryRepository.findByIdCat(id);
     }
 
+    @Override
+    public Categorie searchCatById1(Long id) {
+        if(categoryRepository.findById(id).isPresent())
+           return categoryRepository.findById(id).get();
+        else return null;
+    }
+
+    @Override
+    public Categorie addProductToCategorie(Long idPdt, Long idCat) {
+        return null;
+    }
+
+    @Override
+    public Categorie deleteProductToCategorie(Long idPdt, Long idCat) {
+        return null;
+    }
+
+    @Override
+    public Categorie deleteProductToCategorie(List<Produit> produits, Long idCat) {
+        return null;
+    }
 
 }
