@@ -19,10 +19,15 @@ import java.util.stream.Stream;
 public class ManagerShopApplication //implements CommandLineRunner
 {
 
-	@Autowired
+	//@Autowired
 	private CategorieService categorieService;
-	@Autowired
+	//@Autowired
 	private RoleService roleService;
+
+	public ManagerShopApplication(CategorieService categorieService, RoleService roleService) {
+		this.categorieService = categorieService;
+		this.roleService = roleService;
+	}
 
 
 	public static void main(String[] args) {

@@ -4,6 +4,7 @@ import com.example.managershop.dao.PersonneRepository;
 import com.example.managershop.entities.Client;
 import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.User;
+import com.example.managershop.exception.NullException;
 import com.example.managershop.service.PersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class PersonneServiceImpl implements PersonneService {
 
 
     @Override
-    public User saveUser(User u) {
-        if (ObjectUtils.nullSafeEquals(u, null)) return null;
+    public User saveUser(User u) throws NullException {
+        if (ObjectUtils.nullSafeEquals(u, null)) throw new NullException("User cant be null !!");
         return (User)personneRepository.save(u);
     }
 

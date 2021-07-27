@@ -2,6 +2,7 @@ package com.example.managershop.service;
 
 import com.example.managershop.entities.Role;
 import com.example.managershop.entities.User;
+import com.example.managershop.exception.NullException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface AccountService {
      * @param role
      * @return
      */
-    public Role save(Role role);
+    public Role save(Role role) throws NullException;
 
 
     public User loadUserByUsername( String username);

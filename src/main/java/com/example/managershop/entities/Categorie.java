@@ -15,8 +15,8 @@ import java.util.Collection;
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class Categorie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCat;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String idCat;
    // @NotBlank(message = "Name is mandatory")
     //@Column(length=50)
     //@Size(max = 30 , min = 8)
@@ -27,7 +27,7 @@ public class Categorie {
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Produit> produits= new ArrayList<>();
 
-    public Categorie(Long idCat, String nomCat) {
+    public Categorie(String idCat, String nomCat) {
         this.idCat = idCat;
         this.nomCat = nomCat;
     }

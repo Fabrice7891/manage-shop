@@ -10,18 +10,16 @@ import java.util.List;
 
 
 public interface CategorieService {
-    public Categorie findByIdcat(Long idcat) throws RessourseNotFounfException;
+    public Categorie findByIdcat(String idcat) throws RessourseNotFounfException;
     public Categorie addCategory(Categorie c) throws NullException;
-    public boolean isExistCat(Long idCat);
-    public Categorie updateCat(Long idCat, Categorie newCat) throws CategorieNotFoundException, RessourseNotFounfException;
-    public Categorie deleteCat(Long idCat) throws CategorieNotFoundException, RessourseNotFounfException;
+    public boolean isExistCat(String idCat);
+    public Categorie updateCat(String idCat, Categorie newCat) throws CategorieNotFoundException, RessourseNotFounfException;
+    public Categorie deleteCat(String idCat) throws CategorieNotFoundException, RessourseNotFounfException;
     public List<Categorie> findAll(String keyword);
     public List<Categorie> findAll();
-    public Categorie searchCatById(Long id);
-    public Categorie searchCatById1(Long idcat);
-    public Categorie addProductToCategorie(Long idPdt, Long idCat);
-    public Categorie deleteProductToCategorie(Long idPdt , Long idCat);
-    public Categorie deleteProductToCategorie(List<Produit> produits , Long idCat);
+    public Categorie addProductToCategorie(Long idPdt, String idCat);
+    public Categorie deleteProductToCategorie(Long idPdt , String idCat);
+    public Categorie deleteProductToCategorie(List<Produit> produits , String idCat);
 
 
 

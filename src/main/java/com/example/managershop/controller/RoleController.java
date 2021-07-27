@@ -3,6 +3,7 @@ package com.example.managershop.controller;
 import com.example.managershop.dto.Map.MapAll;
 import com.example.managershop.dto.RoleDto;
 import com.example.managershop.entities.Role;
+import com.example.managershop.exception.NullException;
 import com.example.managershop.service.AccountService;
 import com.example.managershop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class RoleController {
     }*/
 
     @PostMapping("/role")
-    public Role saveRole(@Valid @RequestBody RoleDto roleDto){
+    public Role saveRole(@Valid @RequestBody RoleDto roleDto) throws NullException {
         if(ObjectUtils.nullSafeEquals(roleDto, null)) return  null;
         return accountService.save(mapAll.roleDtoTorole(roleDto));
     }
