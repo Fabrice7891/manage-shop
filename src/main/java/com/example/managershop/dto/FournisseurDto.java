@@ -1,24 +1,30 @@
-package com.example.managershop.entities;
+package com.example.managershop.dto;
 
-import lombok.*;
+import com.example.managershop.entities.Produit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
-@Entity
-@Builder
+
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
-public class Fournisseur {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FournisseurDto {
+
+    @JsonIgnore
     private Long idFsseur;
+    @NotNull
     private String nameFsseur;
+    @NotNull
     private String phoneFsseur;
     private String addresseFsseur;
     private String emailFsseur;
     private String villeFsseur;
     private String paysFsseur;
-    @ManyToMany(fetch = FetchType.EAGER)
-    //@Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     private Collection<Produit> produits= new ArrayList<>();
 }

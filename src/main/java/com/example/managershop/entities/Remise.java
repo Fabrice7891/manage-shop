@@ -1,14 +1,12 @@
 package com.example.managershop.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Builder
 @Data @NoArgsConstructor @AllArgsConstructor @ToString
 public class Remise {
     @Id

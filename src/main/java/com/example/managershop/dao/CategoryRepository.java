@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Categorie, Long> {
+public interface CategoryRepository extends JpaRepository<Categorie, String> {
 
     public Categorie findByIdCat(Long idCat);
+
     @Query("SELECT c FROM Categorie c WHERE c.nomCat LIKE %?1%")
-    public List<Categorie> findCatByKeyWord(String keyword);
+    public List<Categorie> findAll(String keyword);
 }
