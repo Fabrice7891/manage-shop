@@ -1,5 +1,6 @@
 package com.example.managershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -25,11 +26,13 @@ public class Produit implements Serializable {
     private LocalDate datePremptonPdt;
     @ManyToOne
     @JoinColumn(name = "CODE_CAT")
+    @JsonIgnore
     private Categorie categorie;
     @OneToMany(mappedBy = "produit")
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Ligne_Commande> ligne_commandes;
     @ManyToMany(mappedBy = "produits", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Collection<Fournisseur> fournisseurs= new ArrayList<>();
     @ManyToOne
     private Remise remise;

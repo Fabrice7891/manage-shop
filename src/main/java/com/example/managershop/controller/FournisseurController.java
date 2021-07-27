@@ -39,4 +39,6 @@ public class FournisseurController {
     public ResponseEntity<List<Fournisseur>> getAllFsseur() {
         return new ResponseEntity<>(fournisseurService.getAllFsseur(), HttpStatus.OK);
     }
+
+
 }

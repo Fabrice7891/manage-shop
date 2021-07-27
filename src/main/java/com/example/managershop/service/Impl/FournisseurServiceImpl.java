@@ -4,6 +4,7 @@ import com.example.managershop.dao.FounisseurRepository;
 import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.dto.Map.MapperEntities;
 import com.example.managershop.entities.Fournisseur;
+import com.example.managershop.entities.Produit;
 import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.FournisseurService;
@@ -54,5 +55,10 @@ public class FournisseurServiceImpl implements FournisseurService {
         Fournisseur fournisseur=founisseurRepository.findById(idfsseur).get();
         founisseurRepository.delete(founisseurRepository.findById(idfsseur).get());
         return fournisseur;
+    }
+
+    @Override
+    public List<Produit> livrerProduit(Long idfsseur, Long idPdt) {
+        return null;
     }
 }
