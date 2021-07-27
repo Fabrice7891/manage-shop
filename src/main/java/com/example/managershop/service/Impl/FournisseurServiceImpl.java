@@ -47,5 +47,12 @@ public class FournisseurServiceImpl implements FournisseurService {
         return founisseurRepository.findById(idfsseur).get();
     }
 
-
+    @Override
+    public Fournisseur deleteFsseur(Long idfsseur) throws RessourseNotFounfException {
+        if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
+                RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
+        Fournisseur fournisseur=founisseurRepository.findById(idfsseur).get();
+        founisseurRepository.delete(founisseurRepository.findById(idfsseur).get());
+        return fournisseur;
+    }
 }

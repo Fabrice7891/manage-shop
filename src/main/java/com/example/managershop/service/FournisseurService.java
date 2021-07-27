@@ -13,4 +13,5 @@ public interface FournisseurService {
     public Fournisseur addfounisseur(FournisseurDto fournisseurDto) throws NullException;
     public List<Fournisseur> getAllFsseur();
     public Fournisseur getFsseurById(Long idfsseur) throws RessourseNotFounfException;
+    public Fournisseur deleteFsseur(Long idfsseur) throws RessourseNotFounfException;
 }
