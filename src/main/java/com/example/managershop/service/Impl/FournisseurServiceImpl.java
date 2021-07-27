@@ -1,20 +1,42 @@
 package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.FounisseurRepository;
+
+import com.example.managershop.entities.Fournisseur;
+
 import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.dto.Map.MapperEntities;
 import com.example.managershop.entities.Fournisseur;
 import com.example.managershop.exception.NullException;
+
 import com.example.managershop.service.FournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.util.List;
+
 import java.util.UUID;
+
 
 @Service
 @Transactional
 public class FournisseurServiceImpl implements FournisseurService {
+
+
+    @Autowired
+    private FounisseurRepository founisseurRepository;
+    @Override
+    public List<Fournisseur> getAllFournisseur() {
+        return founisseurRepository.findAll();
+    }
+
+    @Override
+    public Fournisseur findFsseurById(Long idfsseur) {
+        if(!founisseurRepository.findById(idfsseur).isPresent())  throw new
+        return null;
+
     @Autowired
     private FounisseurRepository founisseurRepository;
     @Autowired
@@ -31,5 +53,6 @@ public class FournisseurServiceImpl implements FournisseurService {
         //fournisseur.setIdFsseur(UUID.randomUUID().toString());
         founisseurRepository.save(fournisseur);
         return fournisseur;
+
     }
 }
