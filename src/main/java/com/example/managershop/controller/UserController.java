@@ -3,6 +3,7 @@ package com.example.managershop.controller;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.User;
+import com.example.managershop.exception.NullException;
 import com.example.managershop.service.AccountService;
 import com.example.managershop.service.CategorieService;
 import com.example.managershop.service.PersonneService;
@@ -28,7 +29,7 @@ public class UserController {
 
     @PostMapping("/")
     @ApiOperation(value = "Create a User")
-    public ResponseEntity<User> createCategorie(@Valid @RequestBody User user) {
+    public ResponseEntity<User> createCategorie(@Valid @RequestBody User user) throws NullException {
         return new ResponseEntity<>(personneService.saveUser(user), HttpStatus.CREATED);
     }
 

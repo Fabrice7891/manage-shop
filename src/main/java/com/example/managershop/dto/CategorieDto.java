@@ -2,6 +2,7 @@
 package com.example.managershop.dto;
 
 import com.example.managershop.entities.Produit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -18,7 +19,7 @@ import java.util.Collection;
 @Builder
 public class CategorieDto {
 
-
+    @JsonIgnore
     private Long idCat;
     // @NotBlank(message = "Name is mandatory")
     //@Column(length=50)
@@ -26,6 +27,7 @@ public class CategorieDto {
     //@NotNull
     private String nomCat;
     private Boolean archived=false;
+    @JsonIgnore
     private Collection<Produit> produits= new ArrayList<>();
 
 }

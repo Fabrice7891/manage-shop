@@ -56,20 +56,20 @@ public class CategorieController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categorie> getCatById(@PathVariable("id") Long id) throws RessourseNotFounfException {
+    public ResponseEntity<Categorie> getCatById(@PathVariable("id") String id) throws RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.findByIdcat(id), HttpStatus.OK);
     }
 
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Categorie> deleteCat(@PathVariable("id") Long id) throws CategorieNotFoundException, RessourseNotFounfException {
+    public ResponseEntity<Categorie> deleteCat(@PathVariable("id") String id) throws CategorieNotFoundException, RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.deleteCat(id), HttpStatus.OK);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categorie> updateCat(@PathVariable("id") Long id, @Valid @RequestBody Categorie newCat) throws CategorieNotFoundException, RessourseNotFounfException {
+    public ResponseEntity<Categorie> updateCat(@PathVariable("id") String id, @Valid @RequestBody Categorie newCat) throws CategorieNotFoundException, RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.updateCat(id, newCat), HttpStatus.OK);
     }
 

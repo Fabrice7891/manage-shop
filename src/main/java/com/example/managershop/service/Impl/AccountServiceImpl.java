@@ -5,6 +5,8 @@ import com.example.managershop.dao.RoleRepository;
 import com.example.managershop.entities.Personne;
 import com.example.managershop.entities.Role;
 import com.example.managershop.entities.User;
+import com.example.managershop.exception.NullException;
+import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,8 +54,8 @@ public class AccountServiceImpl implements AccountService
     }
 
     @Override
-    public Role save(Role role){
-        if(ObjectUtils.nullSafeEquals(role,null)) return null;
+    public Role save(Role role) throws NullException {
+        if(role.getNameRole().equals(null)) throw new NullException("Must have a value");
         return roleRepository.save(role);
     }
 
