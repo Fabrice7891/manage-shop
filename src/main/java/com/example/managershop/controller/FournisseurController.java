@@ -31,7 +31,7 @@ public class FournisseurController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Delete a Fournisseur")
-    public ResponseEntity<Fournisseur> deleteFornisseur(@PathVariable Long idfsseur) throws NullException, RessourseNotFounfException {
+    public ResponseEntity<Fournisseur> deleteFornisseur(@PathVariable("id") Long idfsseur) throws NullException, RessourseNotFounfException {
         return new ResponseEntity<>(fournisseurService.deleteFsseur(idfsseur), HttpStatus.OK);
     }
 
