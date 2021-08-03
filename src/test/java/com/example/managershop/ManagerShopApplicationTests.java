@@ -19,13 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
-@EnableJpaRepositories(basePackageClasses = {CategorieService.class , CategoryRepository.class})
 class ManagerShopApplicationTests {
-
-	@MockBean
-	private CategoryRepository  categoryRepository;
-	@Autowired
-	private CategorieService categorieService;
 
 	@Test
 	void contextLoads() {
