@@ -15,8 +15,8 @@ class CategoryRepositoryTest {
     @Autowired
     private  CategoryRepository categoryRepository;
 
-    @Autowired
-    private CategorieService categorieService;
+    //@Autowired
+    //private CategorieService categorieService;
 
     @Test
     void findByIdCatTest() {
