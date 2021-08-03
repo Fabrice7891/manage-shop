@@ -10,6 +10,7 @@ import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
+//@Component
 //@AllArgsConstructor
 public class CategorieServiceImpl implements CategorieService {
 

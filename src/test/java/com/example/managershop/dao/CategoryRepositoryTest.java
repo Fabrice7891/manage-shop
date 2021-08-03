@@ -1,6 +1,7 @@
 package com.example.managershop.dao;
 
 import com.example.managershop.entities.Categorie;
+import com.example.managershop.service.CategorieService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 //import org.junit.Test;
@@ -9,20 +10,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 
 @DataJpaTest
-
 class CategoryRepositoryTest {
 
-   // @Autowired
+    @Autowired
     private  CategoryRepository categoryRepository;
 
-    CategoryRepositoryTest(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    @Autowired
+    private CategorieService categorieService;
 
-    /*CategoryRepositoryTest(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
-*/
     @Test
     void findByIdCatTest() {
     }

@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
+@Data @AllArgsConstructor @ToString //@NoArgsConstructor
 public class Categorie {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,9 @@ public class Categorie {
     @OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Produit> produits= new ArrayList<>();
+
+    public Categorie() {
+    }
 
     public Categorie(String idCat, String nomCat) {
         this.idCat = idCat;

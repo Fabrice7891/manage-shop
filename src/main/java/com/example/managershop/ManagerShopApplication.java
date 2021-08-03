@@ -1,7 +1,9 @@
 package com.example.managershop;
 
+import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.exception.NullException;
+import com.example.managershop.service.AccountService;
 import com.example.managershop.service.CategorieService;
 import com.example.managershop.service.RoleService;
 import org.modelmapper.ModelMapper;
@@ -10,29 +12,29 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.stream.Stream;
 
 @SpringBootApplication //(exclude = SecurityAutoConfiguration.class)
+@EnableJpaRepositories(basePackageClasses = {CategorieService.class , CategoryRepository.class})
+//@ComponentScan(basePackages = {"com.example.ManagershopApplication"})
 //@EnableSwagger2
 public class ManagerShopApplication //implements CommandLineRunner
 {
 
-	@Autowired
+	//@Autowired
 	private CategorieService categorieService;
-	@Autowired
+	//@Autowired
 	private RoleService roleService;
 
-	/*public ManagerShopApplication(CategorieService categorieService, RoleService roleService) {
+	public ManagerShopApplication(CategorieService categorieService, RoleService roleService) {
 		this.categorieService = categorieService;
 		this.roleService = roleService;
-	}*/
+	}
 
-	/*public ManagerShopApplication(CategorieService categorieService, RoleService roleService) {
-		this.categorieService = categorieService;
-		this.roleService = roleService;
-	}*/
 
 
 	public static void main(String[] args) {
@@ -51,7 +53,7 @@ public class ManagerShopApplication //implements CommandLineRunner
 	}*/
 
 	@Bean
-	CommandLineRunner start(/*AccountService accountService, RoleService roleService*/){
+	CommandLineRunner start(/*AccountService accountService, RoleService roleService, CategorieService categorieService*/){
 		return  args -> {
 
 			/*Stream.of("Role1","Role2","Role3","Role4","Role5").forEach(r->{
