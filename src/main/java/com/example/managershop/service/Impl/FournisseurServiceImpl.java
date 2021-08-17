@@ -4,12 +4,15 @@ import com.example.managershop.dao.FounisseurRepository;
 import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.dto.Map.MapperEntities;
 import com.example.managershop.entities.Fournisseur;
+import com.example.managershop.entities.Produit;
 import com.example.managershop.exception.NullException;
+import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.FournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,5 +34,31 @@ public class FournisseurServiceImpl implements FournisseurService {
         //fournisseur.setIdFsseur(UUID.randomUUID().toString());
         founisseurRepository.save(fournisseur);
         return fournisseur;
+    }
+
+    @Override
+    public List<Fournisseur> getAllFsseur() {
+        return founisseurRepository.findAll();
+    }
+
+    @Override
+    public Fournisseur getFsseurById(Long idfsseur) throws RessourseNotFounfException {
+        if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
+                RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
+        return founisseurRepository.findById(idfsseur).get();
+    }
+
+    @Override
+    public Fournisseur deleteFsseur(Long idfsseur) throws RessourseNotFounfException {
+        if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
+                RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
+        Fournisseur fournisseur=founisseurRepository.findById(idfsseur).get();
+        founisseurRepository.delete(founisseurRepository.findById(idfsseur).get());
+        return fournisseur;
+    }
+
+    @Override
+    public List<Produit> livrerProduit(Long idfsseur, Long idPdt) {
+        return null;
     }
 }

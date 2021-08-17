@@ -5,17 +5,16 @@ import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Fournisseur;
 import com.example.managershop.exception.NullException;
+import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.FournisseurService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/fournisseurs")
@@ -29,4 +28,17 @@ public class FournisseurController {
     public ResponseEntity<Fournisseur> createFornisseur(@Valid @RequestBody FournisseurDto fournisseurDto) throws NullException {
         return new ResponseEntity<>(fournisseurService.addfounisseur(fournisseurDto), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete a Fournisseur")
+    public ResponseEntity<Fournisseur> deleteFornisseur(@PathVariable("id") Long idfsseur) throws NullException, RessourseNotFounfException {
+        return new ResponseEntity<>(fournisseurService.deleteFsseur(idfsseur), HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Fournisseur>> getAllFsseur() {
+        return new ResponseEntity<>(fournisseurService.getAllFsseur(), HttpStatus.OK);
+    }
+
+
 }

@@ -4,6 +4,7 @@ import com.example.managershop.dao.CategoryRepository;
 import com.example.managershop.dto.CategorieDto;
 import com.example.managershop.dto.Map.MapAll;
 import com.example.managershop.entities.Categorie;
+import com.example.managershop.entities.Produit;
 import com.example.managershop.exception.CategorieNotFoundException;
 import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -41,6 +43,12 @@ public class CategorieController {
         return new ResponseEntity<>(categorieService.addCategory(mapAll.categorieDtoToCategorie(categorieDto)), HttpStatus.CREATED);
     }
 
+
+    @PostMapping("/{idPdt}/{idCat}")
+    @ApiOperation(value = "Create a Category")
+    public ResponseEntity<Categorie> AddPdtToCategorie(@PathVariable String idCat, @PathVariable Long idPdt) throws RessourseNotFounfException {
+        return new ResponseEntity<>(categorieService.addProductToCategorie(idPdt,idCat), HttpStatus.OK);
+    }
 
     /*@PostMapping("/")
     @ApiOperation(value = "Create a Category")
@@ -73,4 +81,8 @@ public class CategorieController {
         return new ResponseEntity<>(categorieService.updateCat(id, newCat), HttpStatus.OK);
     }
 
+    @GetMapping("/test/{idCat}")
+    public ResponseEntity<Collection<Produit>> getAllPdtByCategorie(@PathVariable String idCat) throws RessourseNotFounfException {
+        return new ResponseEntity<>(categorieService.getProductByCategorie(idCat), HttpStatus.OK);
+    }
 }

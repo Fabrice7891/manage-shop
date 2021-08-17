@@ -1,6 +1,7 @@
 package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.CategoryRepository;
+import com.example.managershop.dao.ProduitRepository;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Produit;
 import com.example.managershop.exception.CategorieNotFoundException;
@@ -9,14 +10,17 @@ import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @Transactional
+//@Component
 //@AllArgsConstructor
 public class CategorieServiceImpl implements CategorieService {
 
@@ -24,6 +28,8 @@ public class CategorieServiceImpl implements CategorieService {
     private CategorieService categorieService ;
     @Autowired
     private CategoryRepository categoryRepository ;
+    @Autowired
+    private ProduitRepository produitRepository;
 
    /* public CategorieServiceImpl(CategorieService categorieService, CategoryRepository categoryRepository) {
         this.categorieService = categorieService;
@@ -76,19 +82,31 @@ public class CategorieServiceImpl implements CategorieService {
 
 
     @Override
-    public Categorie addProductToCategorie(Long idPdt, String idCat) {
-
-        return null;
+    public Categorie addProductToCategorie(Long idPdt, String idCat) throws RessourseNotFounfException {
+        if(!categoryRepository.findById(idCat).isPresent()) throw  new RessourseNotFounfException("category with id :"+idCat+" not found");
+        if(!produitRepository.findById(idPdt).isPresent()) throw new RessourseNotFounfException("Product with id :"+idPdt+" not found");
+        Categorie categorie=categoryRepository.findById(idCat).get();
+        Produit produit=produitRepository.findById(idPdt).get();
+        categorie.getProduits().add(produit);
+        categoryRepository.save(categorie);
+        return categorie;
     }
 
     @Override
     public Categorie deleteProductToCategorie(Long idPdt, String idCat) {
+
         return null;
     }
 
     @Override
     public Categorie deleteProductToCategorie(List<Produit> produits, String idCat) {
         return null;
+    }
+
+    @Override
+    public Collection<Produit> getProductByCategorie(String idCat) throws RessourseNotFounfException {
+        if(!categoryRepository.findById(idCat).isPresent()) throw new RessourseNotFounfException("Categorie with Id :"+idCat+" not found");
+        return categoryRepository.findById(idCat).get().getProduits();
     }
 
 
