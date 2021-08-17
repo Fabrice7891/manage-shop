@@ -14,7 +14,8 @@ public interface AccountService {
 
     /**
      * @param role
-     * @return
+     * @return Role
+     *
      */
     public Role save(Role role) throws NullException;
 

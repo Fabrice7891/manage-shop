@@ -18,9 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.stream.Stream;
 
-@SpringBootApplication //(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = {CategorieService.class , CategoryRepository.class})
-//@ComponentScan(basePackages = {"com.example.ManagershopApplication"})
 //@EnableSwagger2
 public class ManagerShopApplication //implements CommandLineRunner
 {
@@ -33,19 +32,6 @@ public class ManagerShopApplication //implements CommandLineRunner
 	public static void main(String[] args) {
 		SpringApplication.run(ManagerShopApplication.class, args);
 	}
-
-	/*@Override
-	public void run(String... args) throws Exception {
-		Stream.of("Cat1","Cat2","Cat3").forEach(c->{
-			categorieService.addCategory(new Categorie(null,c));
-		});
-
-		categorieService.showAllCat().forEach(cat->{
-			System.out.println(cat.getNomCat());
-		});
-	}*/
-
-
 
 
 	@Bean
