@@ -1,5 +1,6 @@
 package com.example.managershop.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,19 +17,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity @RequiredArgsConstructor
 public class SecurityConfig
 
         extends WebSecurityConfigurerAdapter {
-    @Autowired
+    //@Autowired
     private UserDetailsService userDetailsService;
-    @Autowired
+    //@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+       // auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override

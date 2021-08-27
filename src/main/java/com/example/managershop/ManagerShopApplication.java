@@ -24,11 +24,6 @@ import java.util.stream.Stream;
 public class ManagerShopApplication //implements CommandLineRunner
 {
 
-
-
-
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(ManagerShopApplication.class, args);
 	}

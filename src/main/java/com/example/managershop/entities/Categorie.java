@@ -1,5 +1,6 @@
 package com.example.managershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -25,6 +26,7 @@ public class Categorie {
     private Boolean archived=false;
     @OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     private Collection<Produit> produits= new ArrayList<>();
 
     public Categorie() {

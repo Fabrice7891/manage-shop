@@ -5,6 +5,7 @@ import com.example.managershop.dto.ProduitDto;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Fournisseur;
 import com.example.managershop.entities.Produit;
+import com.example.managershop.exception.CategorieNotFoundException;
 import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.ProduitService;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -39,6 +41,27 @@ public class ProduitController {
     public ResponseEntity<List<Produit>> getAllPdt(@RequestParam String keyword) throws RessourseNotFounfException {
         return new ResponseEntity<>(produitService.searchPdtByName(keyword), HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produit> updateCat(@PathVariable("id") String id, @Valid @RequestBody ProduitDto produitDto) throws RessourseNotFounfException, NullException {
+        return new ResponseEntity<>(produitService.updadePdt(id, produitDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/{idcat}")
+    public ResponseEntity<Collection<Produit>> getAllPdtByCat(@PathVariable String idcat) throws RessourseNotFounfException {
+        return new ResponseEntity<>(produitService.getAllProductByCategory(idcat), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Produit> deletePdt(@PathVariable("id") String id) throws RessourseNotFounfException {
+        return new ResponseEntity<>(produitService.deletePdt(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/getCat/{idcat}")
+    public ResponseEntity<List<Produit>> getAllPdtByCat1(@PathVariable String idcat) throws RessourseNotFounfException {
+        return new ResponseEntity<>(produitService.getProductByCategorie1(idcat), HttpStatus.OK);
+    }
+
 
 
 }

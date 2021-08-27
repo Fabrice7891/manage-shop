@@ -20,12 +20,9 @@ public class RunnerConfig {
     private RoleService roleService;
 
     @Bean
-    CommandLineRunner start(/*AccountService accountService, RoleService roleService, CategorieService categorieService*/){
+    CommandLineRunner start(){
         return  args -> {
 
-			/*Stream.of("Role1","Role2","Role3","Role4","Role5").forEach(r->{
-				    accountService.save(Role.builder().nameRole(r).levelPriorite((int)(Math.random() * 6)).build());
-*/
             Stream.of("Categorie1","Categorie2","Categorie3","Categorie4","Categorie5","Categorie6").forEach(c->{
                 try {
                     categorieService.addCategory(Categorie.builder().nomCat(c).archived(false).build());

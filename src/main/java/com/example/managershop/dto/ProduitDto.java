@@ -19,7 +19,7 @@ import java.util.Collection;
 public class ProduitDto {
 
     @JsonIgnore
-    private Long idPdt;
+    private String idPdt;
     @NotNull
     private String nomPdt;
     private float prixAchatPdt;

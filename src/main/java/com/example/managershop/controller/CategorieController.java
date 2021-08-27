@@ -11,6 +11,7 @@ import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,7 @@ public class CategorieController {
 
     @PostMapping("/{idPdt}/{idCat}")
     @ApiOperation(value = "Create a Category")
-    public ResponseEntity<Categorie> AddPdtToCategorie(@PathVariable String idCat, @PathVariable Long idPdt) throws RessourseNotFounfException {
+    public ResponseEntity<Categorie> AddPdtToCategorie(@PathVariable String idCat, @PathVariable String idPdt) throws RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.addProductToCategorie(idPdt,idCat), HttpStatus.OK);
     }
 
@@ -60,6 +61,14 @@ public class CategorieController {
     @GetMapping("/")
     public ResponseEntity<List<Categorie>> getAllCategories() {
         return new ResponseEntity<>(categorieService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public ResponseEntity<Page<Categorie>> getAllCategoriesPagined(@PathVariable("pageNo") int pageNo
+    , @RequestParam ("sortField") String sortField
+            ,@RequestParam("sortDirec") String sortDirec) {
+        int size=3;
+        return new ResponseEntity<>(categorieService.listePaginedCategorie(pageNo, size,sortField,sortDirec), HttpStatus.OK);
     }
 
 
