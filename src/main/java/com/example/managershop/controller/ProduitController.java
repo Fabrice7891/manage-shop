@@ -62,11 +62,9 @@ public class ProduitController {
         return new ResponseEntity<>(produitService.getProductByCategorie1(idcat), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/pdt")
     public ResponseEntity<List<Produit>> searchPdtByKeyword(@RequestParam("namePdt") String namepdt) throws RessourseNotFounfException {
         return new ResponseEntity<>(produitService.searchPdtByName(namepdt), HttpStatus.OK);
     }
-
-
 
 }
