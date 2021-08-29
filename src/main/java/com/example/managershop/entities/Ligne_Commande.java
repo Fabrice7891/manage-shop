@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Ligne_Commande {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,11 +13,11 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Produit implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPdt;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String idPdt;
     private String nomPdt;
     private float prixAchatPdt;
     private float prixVentePdt;
@@ -30,6 +30,7 @@ public class Produit implements Serializable {
     private Categorie categorie;
     @OneToMany(mappedBy = "produit")
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     private Collection<Ligne_Commande> ligne_commandes;
     @ManyToMany(mappedBy = "produits", fetch = FetchType.EAGER)
     @JsonIgnore

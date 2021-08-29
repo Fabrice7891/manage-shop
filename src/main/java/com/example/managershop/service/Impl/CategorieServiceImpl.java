@@ -10,6 +10,10 @@ import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +69,7 @@ public class CategorieServiceImpl implements CategorieService {
     public Categorie deleteCat(String idCat) throws RessourseNotFounfException {
         if(!isExistCat(idCat)) throw new RessourseNotFounfException("Categorie with id ID :"+idCat+" not found");
         Categorie cate = categoryRepository.findById(idCat).get();
-        categoryRepository.delete(findByIdcat(idCat));
+        categoryRepository.delete(cate);
         return cate;
     }
 
@@ -79,10 +83,14 @@ public class CategorieServiceImpl implements CategorieService {
         return categoryRepository.findAll();
     }
 
-
+    @Override
+    public List<Categorie> findAllSort() {
+        //Categorie categorie= new Categorie();
+        return categoryRepository.findAll(Sort.by("nomCat","idCat").ascending());
+    }
 
     @Override
-    public Categorie addProductToCategorie(Long idPdt, String idCat) throws RessourseNotFounfException {
+    public Categorie addProductToCategorie(String idPdt, String idCat) throws RessourseNotFounfException {
         if(!categoryRepository.findById(idCat).isPresent()) throw  new RessourseNotFounfException("category with id :"+idCat+" not found");
         if(!produitRepository.findById(idPdt).isPresent()) throw new RessourseNotFounfException("Product with id :"+idPdt+" not found");
         Categorie categorie=categoryRepository.findById(idCat).get();
@@ -91,6 +99,9 @@ public class CategorieServiceImpl implements CategorieService {
         categoryRepository.save(categorie);
         return categorie;
     }
+
+
+
 
     @Override
     public Categorie deleteProductToCategorie(Long idPdt, String idCat) {
@@ -108,6 +119,15 @@ public class CategorieServiceImpl implements CategorieService {
         if(!categoryRepository.findById(idCat).isPresent()) throw new RessourseNotFounfException("Categorie with Id :"+idCat+" not found");
         return categoryRepository.findById(idCat).get().getProduits();
     }
+
+    @Override
+    public Page<Categorie> listePaginedCategorie(int page, int size, String sortfield, String SortDirection) {
+        Sort sort = SortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortfield).ascending() : Sort.by(sortfield).descending();
+        Pageable pageable= PageRequest.of(page - 1 , size, sort);
+        return categoryRepository.findAll(pageable);
+    }
+
 
 
    /* @Override

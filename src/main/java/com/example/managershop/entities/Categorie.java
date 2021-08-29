@@ -1,5 +1,6 @@
 package com.example.managershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -12,7 +13,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @ToString //@NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Categorie {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,12 @@ public class Categorie {
     private Boolean archived=false;
     @OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     private Collection<Produit> produits= new ArrayList<>();
 
-    public Categorie() {
+    /*public Categorie() {
     }
-
+*/
     public Categorie(String idCat, String nomCat) {
         this.idCat = idCat;
         this.nomCat = nomCat;
