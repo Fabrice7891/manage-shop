@@ -23,7 +23,7 @@ public class FournisseurController {
     @Autowired
     private FournisseurService fournisseurService;
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation(value = "Create a Fournisseur")
     public ResponseEntity<Fournisseur> createFornisseur(@Valid @RequestBody FournisseurDto fournisseurDto) throws NullException {
         return new ResponseEntity<>(fournisseurService.addfounisseur(fournisseurDto), HttpStatus.CREATED);
@@ -35,7 +35,7 @@ public class FournisseurController {
         return new ResponseEntity<>(fournisseurService.deleteFsseur(idfsseur), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Fournisseur>> getAllFsseur() {
         return new ResponseEntity<>(fournisseurService.getAllFsseur(), HttpStatus.OK);
     }
