@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data @NoArgsConstructor @AllArgsConstructor
 @DiscriminatorValue("USER")
 public class User extends Personne {
     private String password;

@@ -38,7 +38,7 @@ public class CategorieController {
         return new ResponseEntity<>(categorieService.addCategory(categorie), HttpStatus.CREATED);
     }*/
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation(value = "Create a Category")
     public ResponseEntity<Categorie> createCategorieDTO(@Valid @RequestBody CategorieDto categorieDto) throws NullException {
         return new ResponseEntity<>(categorieService.addCategory(mapAll.categorieDtoToCategorie(categorieDto)), HttpStatus.CREATED);
@@ -58,9 +58,14 @@ public class CategorieController {
     }*/
 
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Categorie>> getAllCategories() {
         return new ResponseEntity<>(categorieService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/listSort")
+    public ResponseEntity<List<Categorie>> getAllCategoriesSort() {
+        return new ResponseEntity<>(categorieService.findAllSort(), HttpStatus.OK);
     }
 
     @GetMapping("/page/{pageNo}")
@@ -72,25 +77,25 @@ public class CategorieController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping
     public ResponseEntity<Categorie> getCatById(@PathVariable("id") String id) throws RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.findByIdcat(id), HttpStatus.OK);
     }
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     public ResponseEntity<Categorie> deleteCat(@PathVariable("id") String id) throws CategorieNotFoundException, RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.deleteCat(id), HttpStatus.OK);
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Categorie> updateCat(@PathVariable("id") String id, @Valid @RequestBody Categorie newCat) throws CategorieNotFoundException, RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.updateCat(id, newCat), HttpStatus.OK);
     }
 
-    @GetMapping("/test/{idCat}")
+    @GetMapping("/products/{idCat}")
     public ResponseEntity<Collection<Produit>> getAllPdtByCategorie(@PathVariable String idCat) throws RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.getProductByCategorie(idCat), HttpStatus.OK);
     }

@@ -9,6 +9,7 @@ import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
+@Disabled
 class CategorieServiceImplTest {
 
     @Mock

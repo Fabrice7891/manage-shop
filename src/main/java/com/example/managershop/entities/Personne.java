@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 //@Builder
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data @NoArgsConstructor @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE_PERSON")
 public abstract class Personne implements Serializable {

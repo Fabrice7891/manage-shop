@@ -172,6 +172,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>manager-shop-v1</finalName>
 	</build>
 
 	<profiles>
@@ -189,6 +190,9 @@
 			<properties>
 				<activatedProperties>prod</activatedProperties>
 			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 	</profiles>
 

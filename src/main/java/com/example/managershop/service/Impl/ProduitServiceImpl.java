@@ -72,8 +72,8 @@ public class ProduitServiceImpl implements ProduitService {
 
     @Override
     public List<Produit> searchPdtByName(String namePdt) throws RessourseNotFounfException {
-        if (produitRepository.searchPdtByKeyword(namePdt).isEmpty()) throw new RessourseNotFounfException("is empty");
-        return produitRepository.searchPdtByKeyword(namePdt);
+        if (produitRepository.findByNomPdtContaining(namePdt).isEmpty()) throw new RessourseNotFounfException("is empty");
+        return produitRepository.findByNomPdtContaining(namePdt);
     }
 
     @Override

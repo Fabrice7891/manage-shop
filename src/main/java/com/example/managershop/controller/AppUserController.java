@@ -21,13 +21,13 @@ import java.util.Collection;
 public class AppUserController {
     private final AppUserService appUserService;
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation(value = "Create a User")
     public ResponseEntity<AppUser> createUser(@Valid @RequestBody AppUserDto appUserDto){
         return new ResponseEntity<>(appUserService.saveUser(appUserDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<Collection<AppUser>> getAllUsers() {
         return new ResponseEntity<>(appUserService.getAllUser(), HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class AppUserController {
     }
 
 
-    @GetMapping("/get/{iduser}")
+    @GetMapping("/roles/{iduser}")
     public ResponseEntity<Collection<AppRole>> getAllRoleByUser(@PathVariable("iduser") String iduser) throws RessourseNotFounfException {
         return new ResponseEntity<>(appUserService.getAllRoleByUser(iduser), HttpStatus.OK);
     }

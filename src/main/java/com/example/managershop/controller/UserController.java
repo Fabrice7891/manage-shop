@@ -27,7 +27,7 @@ public class UserController {
     private AccountService accountService;
 
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation(value = "Create a User")
     public ResponseEntity<User> createCategorie(@Valid @RequestBody User user) throws NullException {
         return new ResponseEntity<>(personneService.saveUser(user), HttpStatus.CREATED);
@@ -46,7 +46,7 @@ public class UserController {
         return new ResponseEntity<>(accountService.moveRoleToUser(idUser,idRole), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Personne>> getAllUsers() {
         return new ResponseEntity<>(personneService.getAllUser(), HttpStatus.OK);
     }

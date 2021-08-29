@@ -19,6 +19,7 @@ public interface CategorieService {
     public Categorie deleteCat(String idCat) throws CategorieNotFoundException, RessourseNotFounfException;
     public List<Categorie> findAll(String keyword);
     public List<Categorie> findAll();
+    public List<Categorie> findAllSort();
     public Categorie addProductToCategorie(String idPdt, String idCat) throws RessourseNotFounfException;
     public Categorie deleteProductToCategorie(Long idPdt , String idCat);
     public Categorie deleteProductToCategorie(List<Produit> produits , String idCat);

@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
+@Data @AllArgsConstructor @NoArgsConstructor
 @DiscriminatorValue("CLT")
 public class Client extends Personne{
 

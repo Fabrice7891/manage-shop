@@ -16,7 +16,6 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class AppUser {
 
     @Id

@@ -11,7 +11,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor @ToString
+@AllArgsConstructor @NoArgsConstructor
 public class AppRole {
     @Id
     private String idRole;

@@ -32,7 +32,7 @@ public class ProduitController {
         return new ResponseEntity<>(produitService.savePdt(idCat, produitDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Produit>> getAllPdt() {
         return new ResponseEntity<>(produitService.getAllPdt(), HttpStatus.OK);
     }
@@ -60,6 +60,11 @@ public class ProduitController {
     @GetMapping("/getCat/{idcat}")
     public ResponseEntity<List<Produit>> getAllPdtByCat1(@PathVariable String idcat) throws RessourseNotFounfException {
         return new ResponseEntity<>(produitService.getProductByCategorie1(idcat), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Produit>> searchPdtByKeyword(@RequestParam("namePdt") String namepdt) throws RessourseNotFounfException {
+        return new ResponseEntity<>(produitService.searchPdtByName(namepdt), HttpStatus.OK);
     }
 
 

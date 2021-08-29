@@ -73,6 +73,7 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser appUser=appUserRepository.findById(iduser).get();
         AppRole appRole=appRoleRepository.findById(idrole).get();
         //if(appUser.getAppRoles().isEmpty()) throw new
+        if(appUser.getAppRoles()== null) throw new NullPointerException(" Null poiter exception");
         appUser.getAppRoles().add(appRole);
         return appUserRepository.save(appUser);
     }

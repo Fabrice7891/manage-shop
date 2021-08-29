@@ -9,6 +9,7 @@ import com.example.managershop.service.AppRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -23,13 +24,14 @@ public class AppRoleServiceImpl implements AppRoleService {
     @Override
     public AppRole saveRole(AppRoleDto appRoleDto) {
         AppRole appRole= mapperEntities.AppRoleDTOAppRole(appRoleDto);
-        appRole.setIdRole(UUID.randomUUID().toString());
+        String idroleGenreted=UUID.randomUUID().toString();
+        if(!appRoleRepository.findByIdRole(idroleGenreted).equals(null)) throw new RuntimeException("id genereted "+ idroleGenreted+" already exist");
+        appRole.setIdRole(idroleGenreted);
         return appRoleRepository.save(appRole);
     }
 
     @Override
     public AppRole deleRole(String rolename) throws RessourseNotFounfException {
-        //if()
         AppRole appRole= appRoleRepository.findByRolename(rolename);
         if(appRole.equals(null)) throw new RessourseNotFounfException("Role with name"+rolename+" not found");
         appRoleRepository.delete(appRoleRepository.findByRolename(rolename));

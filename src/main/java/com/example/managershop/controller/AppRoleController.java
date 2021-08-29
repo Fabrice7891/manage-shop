@@ -24,13 +24,13 @@ public class AppRoleController {
 
     private final AppRoleService appRoleService;
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation(value = "Create a Role")
     public ResponseEntity<AppRole> createRole(@Valid @RequestBody AppRoleDto appRoleDto){
         return new ResponseEntity<>(appRoleService.saveRole(appRoleDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<Collection<AppRole>> getAllRoles() {
         return new ResponseEntity<>(appRoleService.getAllRoles(), HttpStatus.OK);
     }

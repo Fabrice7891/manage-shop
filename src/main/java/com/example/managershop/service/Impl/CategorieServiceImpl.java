@@ -84,6 +84,12 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
+    public List<Categorie> findAllSort() {
+        //Categorie categorie= new Categorie();
+        return categoryRepository.findAll(Sort.by("nomCat","idCat").ascending());
+    }
+
+    @Override
     public Categorie addProductToCategorie(String idPdt, String idCat) throws RessourseNotFounfException {
         if(!categoryRepository.findById(idCat).isPresent()) throw  new RessourseNotFounfException("category with id :"+idCat+" not found");
         if(!produitRepository.findById(idPdt).isPresent()) throw new RessourseNotFounfException("Product with id :"+idPdt+" not found");

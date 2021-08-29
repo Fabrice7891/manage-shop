@@ -23,7 +23,7 @@ public class RunnerConfig {
     CommandLineRunner start(){
         return  args -> {
 
-            Stream.of("Categorie1","Categorie2","Categorie3","Categorie4","Categorie5","Categorie6").forEach(c->{
+            Stream.of("Test","resussite","God","Allelluya","Jesus","MontReal","resussite").forEach(c->{
                 try {
                     categorieService.addCategory(Categorie.builder().nomCat(c).archived(false).build());
                 } catch (NullException e) {

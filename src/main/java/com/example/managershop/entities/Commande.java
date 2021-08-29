@@ -11,7 +11,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Commande {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

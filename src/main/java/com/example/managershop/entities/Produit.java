@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Produit implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)

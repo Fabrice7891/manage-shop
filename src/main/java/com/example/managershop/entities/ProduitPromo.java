@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Builder
-@Data  @AllArgsConstructor @NoArgsConstructor @ToString
+@Data  @AllArgsConstructor @NoArgsConstructor
 public class ProduitPromo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

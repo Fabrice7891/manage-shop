@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @AllArgsConstructor @ToString //@NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Categorie {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,9 @@ public class Categorie {
     @JsonIgnore
     private Collection<Produit> produits= new ArrayList<>();
 
-    public Categorie() {
+    /*public Categorie() {
     }
-
+*/
     public Categorie(String idCat, String nomCat) {
         this.idCat = idCat;
         this.nomCat = nomCat;

@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Builder
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Remise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
