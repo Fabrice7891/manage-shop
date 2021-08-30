@@ -9,6 +9,8 @@ import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +30,8 @@ import java.util.UUID;
 //@AllArgsConstructor
 public class CategorieServiceImpl implements CategorieService {
 
+    private static final Logger LOGGER= LoggerFactory.getLogger(CategorieServiceImpl.class);
+
     @Autowired
     private CategorieService categorieService ;
     @Autowired
@@ -42,7 +46,9 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public Categorie findByIdcat(String idcat) throws RessourseNotFounfException {
-        if(!categoryRepository.findById(idcat).isPresent()) throw new RessourseNotFounfException("Categorie with id :"+idcat+ "not found");
+        if(!categoryRepository.findById(idcat).isPresent()) {
+            throw new RessourseNotFounfException("Categorie with id :"+idcat+ "not found");
+        }
         return categoryRepository.findById(idcat).get();
     }
 

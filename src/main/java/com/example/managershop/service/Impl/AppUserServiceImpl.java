@@ -9,16 +9,19 @@ import com.example.managershop.entities.AppUser;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.AppUserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.UUID;
-@Slf4j
+//@Slf4j
 @Service @Transactional @RequiredArgsConstructor
 public class AppUserServiceImpl implements AppUserService {
+
+    private static final Logger LOGGER= LoggerFactory.getLogger(AppUserServiceImpl.class);
 
     private final AppRoleRepository appRoleRepository;
     private final MapperEntities mapperEntities;
@@ -32,7 +35,7 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser appUser= mapperEntities.AppUserDTOAppUser(appUserDto);
         appUser.setIdUser(UUID.randomUUID().toString());
         appUser.setPassword(bCryptPasswordEncoder.encode(appUserDto.getPassword())); // Crypte le pwd
-        log.info("Saving new User {} to the database ", appUserDto.getUsername());
+        LOGGER.info("Saving new User {} to the database ", appUserDto.getUsername());
         return appUserRepository.save(appUser);
     }
 

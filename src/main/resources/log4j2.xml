@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%clr{%d{yyyy-MMM-dd HH:mm:ss}}{green} [%t] %clr{%-5level}{Yellow} %-50c{1.} - %clr{%msg}{yellow} %n"  />
+        </Console>
+        <File name="File" fileName="C:\Users\Fab\Desktop\CGI\manageSho.log">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %50c - %clr{%msg}{yellow} %n"  />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
