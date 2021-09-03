@@ -7,7 +7,7 @@ import com.example.managershop.exception.RessourseNotFounfException;
 import java.util.Collection;
 
 public interface AppRoleService {
-    public AppRole saveRole(AppRoleDto appRoleDto);
+    public AppRole saveRole(AppRoleDto appRoleDto) throws RessourseNotFounfException;
     public AppRole deleRole(String rolename) throws RessourseNotFounfException;
     public AppRole updateRole(String idrole, AppRoleDto appRoleDto) throws RessourseNotFounfException;
     public Collection<AppRole> getAllRoles();

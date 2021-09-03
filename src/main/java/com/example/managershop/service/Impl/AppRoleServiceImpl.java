@@ -7,8 +7,10 @@ import com.example.managershop.entities.AppRole;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.AppRoleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Collection;
@@ -17,16 +19,30 @@ import java.util.UUID;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class AppRoleServiceImpl implements AppRoleService {
 
     private final AppRoleRepository appRoleRepository;
     private final MapperEntities mapperEntities;
     @Override
-    public AppRole saveRole(AppRoleDto appRoleDto) {
-        AppRole appRole= mapperEntities.AppRoleDTOAppRole(appRoleDto);
-        String idroleGenreted=UUID.randomUUID().toString();
-        if(!appRoleRepository.findByIdRole(idroleGenreted).equals(null)) throw new RuntimeException("id genereted "+ idroleGenreted+" already exist");
+    public AppRole saveRole(AppRoleDto appRoleDto) throws RessourseNotFounfException {
+        AppRole appRole = mapperEntities.AppRoleDTOAppRole(appRoleDto);
+        String idroleGenreted = UUID.randomUUID().toString();
+        int i = 0;
+        while (i < 5 && !ObjectUtils.isEmpty(appRoleRepository.findByIdRole(idroleGenreted))) {
+            i++;
+            idroleGenreted = UUID.randomUUID().toString();
+            System.out.println("----------" + idroleGenreted);
+        }
+
+        if (!ObjectUtils.isEmpty(appRoleRepository.findByIdRole(idroleGenreted))) {
+            log.error("Role dont save because id dont genereted");
+            throw new RessourseNotFounfException("Role dont save because id role dont generated");
+        }
+
+        //if(!appRoleRepository.findByIdRole(idroleGenreted).equals(null)) throw new RuntimeException("id genereted "+ idroleGenreted+" already exist");
         appRole.setIdRole(idroleGenreted);
+        log.info("Role {} saved with success", appRoleRepository.save(appRole) );
         return appRoleRepository.save(appRole);
     }
 
@@ -46,6 +62,7 @@ public class AppRoleServiceImpl implements AppRoleService {
         appRole.setRolename(appRoleDto.getRolename());
         return appRole;
     }
+
 
     @Override
     public Collection<AppRole> getAllRoles() {

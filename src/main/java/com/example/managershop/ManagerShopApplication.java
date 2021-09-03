@@ -29,7 +29,7 @@ public class ManagerShopApplication //implements CommandLineRunner
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManagerShopApplication.class, args);
-		LOGGER.info("Starting Application..............");
+		LOGGER.info(" Application Started  !!!!! You can use it !!");
 	}
 
 
