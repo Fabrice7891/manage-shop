@@ -52,8 +52,8 @@ public class CategorieController {
     @ApiOperation(value = "Create a Category")
     public ResponseEntity<Categorie> AddPdtToCategorie(@PathVariable String idCat, @PathVariable String idPdt) throws RessourseNotFounfException {
         Categorie categorie=categorieService.addProductToCategorie(idCat, idPdt);
-        log.info("categorie created {} with succes" , categorie.toString());
-        return new ResponseEntity<>(categorieService.addProductToCategorie(idPdt,idCat), HttpStatus.OK);
+        log.info("categorie {} created  with succes" , categorie.toString());
+        return new ResponseEntity<>(categorie, HttpStatus.OK);
 
     }
 

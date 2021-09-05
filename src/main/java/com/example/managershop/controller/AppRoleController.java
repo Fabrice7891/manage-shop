@@ -41,7 +41,7 @@ public class AppRoleController {
     }
 
     @GetMapping("/{rolename}")
-    public ResponseEntity<AppRole> getRoleByRolename(@PathVariable("rolename") String rolename){
+    public ResponseEntity<AppRole> getRoleByRolename(@PathVariable("rolename") String rolename) throws RessourseNotFounfException {
         return new ResponseEntity<>(appRoleService.getRoleByRolename(rolename), HttpStatus.OK);
     }
 
