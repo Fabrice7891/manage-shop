@@ -26,7 +26,7 @@ public class AppRoleController {
 
     @PostMapping
     @ApiOperation(value = "Create a Role")
-    public ResponseEntity<AppRole> createRole(@Valid @RequestBody AppRoleDto appRoleDto){
+    public ResponseEntity<AppRole> createRole(@Valid @RequestBody AppRoleDto appRoleDto) throws RessourseNotFounfException {
         return new ResponseEntity<>(appRoleService.saveRole(appRoleDto), HttpStatus.CREATED);
     }
 
@@ -41,7 +41,7 @@ public class AppRoleController {
     }
 
     @GetMapping("/{rolename}")
-    public ResponseEntity<AppRole> getRoleByRolename(@PathVariable("rolename") String rolename){
+    public ResponseEntity<AppRole> getRoleByRolename(@PathVariable("rolename") String rolename) throws RessourseNotFounfException {
         return new ResponseEntity<>(appRoleService.getRoleByRolename(rolename), HttpStatus.OK);
     }
 

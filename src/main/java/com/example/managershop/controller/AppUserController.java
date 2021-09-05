@@ -6,6 +6,7 @@ import com.example.managershop.entities.AppRole;
 import com.example.managershop.entities.AppUser;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.AppUserService;
+import com.example.managershop.service.Impl.AppRoleServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,7 @@ public class AppUserController {
     public ResponseEntity<Collection<AppRole>> getAllRoleByUser(@PathVariable("iduser") String iduser) throws RessourseNotFounfException {
         return new ResponseEntity<>(appUserService.getAllRoleByUser(iduser), HttpStatus.OK);
     }
+
 
     @PostMapping("/{idrole}/{iduser}")
     @ApiOperation(value = "Add role to user")

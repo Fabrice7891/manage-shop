@@ -10,6 +10,7 @@ import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.CategorieService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categorie")
+@Slf4j
 public class CategorieController {
 
     @Autowired
@@ -41,6 +43,7 @@ public class CategorieController {
     @PostMapping
     @ApiOperation(value = "Create a Category")
     public ResponseEntity<Categorie> createCategorieDTO(@Valid @RequestBody CategorieDto categorieDto) throws NullException {
+        log.info("categorie {} created with succes" , categorieService.addCategory(mapAll.categorieDtoToCategorie(categorieDto)).toString());
         return new ResponseEntity<>(categorieService.addCategory(mapAll.categorieDtoToCategorie(categorieDto)), HttpStatus.CREATED);
     }
 
@@ -48,7 +51,10 @@ public class CategorieController {
     @PostMapping("/{idPdt}/{idCat}")
     @ApiOperation(value = "Create a Category")
     public ResponseEntity<Categorie> AddPdtToCategorie(@PathVariable String idCat, @PathVariable String idPdt) throws RessourseNotFounfException {
-        return new ResponseEntity<>(categorieService.addProductToCategorie(idPdt,idCat), HttpStatus.OK);
+        Categorie categorie=categorieService.addProductToCategorie(idCat, idPdt);
+        log.info("categorie {} created  with succes" , categorie.toString());
+        return new ResponseEntity<>(categorie, HttpStatus.OK);
+
     }
 
     /*@PostMapping("/")
