@@ -64,19 +64,12 @@ public class FournisseurServiceImpl implements FournisseurService {
 
     @Override
     public FournisseurDto updateFounissueur(String idfseur, FournisseurDto newFournisseur) throws RessourseNotFounfException {
-
         if(!founisseurRepository.findById(idfseur).isPresent()) throw new
                 RessourseNotFounfException("Fournisseur With id :"+idfseur+" not found");
 
         Fournisseur fournisseur=mapperEntities.FournisseurDTOFournisseur(newFournisseur);
-        Fournisseur fournisseur1=founisseurRepository.findById(idfseur).get();
-        fournisseur1.setPhoneFsseur(fournisseur.getPhoneFsseur());
-        fournisseur1.setPaysFsseur(fournisseur.getPaysFsseur());
-        fournisseur1.setNameFsseur(fournisseur.getNameFsseur());
-        fournisseur1.setEmailFsseur(fournisseur.getEmailFsseur());
-        fournisseur1.setVilleFsseur(fournisseur.getVilleFsseur());
-        fournisseur1.setAddresseFsseur(fournisseur.getAddresseFsseur());
-        founisseurRepository.save(fournisseur1);
-        return mapperEntities.FournisseurToFournisseurDTO(fournisseur1);
+        fournisseur.setIdFsseur(idfseur);
+        founisseurRepository.save(fournisseur);
+        return mapperEntities.FournisseurToFournisseurDTO(fournisseur);
     }
 }
