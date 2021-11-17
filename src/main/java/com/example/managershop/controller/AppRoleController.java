@@ -31,16 +31,19 @@ public class AppRoleController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Liste All Roles")
     public ResponseEntity<Collection<AppRole>> getAllRoles() {
         return new ResponseEntity<>(appRoleService.getAllRoles(), HttpStatus.OK);
     }
 
     @GetMapping("/shorted")
+    @ApiOperation(value = "List all roles shorted")
     public ResponseEntity<Collection<AppRole>> getAllRolesShorted() {
         return new ResponseEntity<>(appRoleService.getAllRoleShorted(), HttpStatus.OK);
     }
 
     @GetMapping("/{rolename}")
+    @ApiOperation(value = "CGet Role By role name")
     public ResponseEntity<AppRole> getRoleByRolename(@PathVariable("rolename") String rolename) throws RessourseNotFounfException {
         return new ResponseEntity<>(appRoleService.getRoleByRolename(rolename), HttpStatus.OK);
     }

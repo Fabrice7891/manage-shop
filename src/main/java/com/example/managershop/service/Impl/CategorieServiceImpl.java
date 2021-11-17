@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
@@ -106,9 +107,6 @@ public class CategorieServiceImpl implements CategorieService {
         return categorie;
     }
 
-
-
-
     @Override
     public Categorie deleteProductToCategorie(Long idPdt, String idCat) {
 
@@ -132,6 +130,18 @@ public class CategorieServiceImpl implements CategorieService {
                 Sort.by(sortfield).ascending() : Sort.by(sortfield).descending();
         Pageable pageable= PageRequest.of(page - 1 , size, sort);
         return categoryRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Categorie> getCatByNameIgnoreCase(String nameCat) throws RessourseNotFounfException {
+        if (ObjectUtils.isEmpty(categoryRepository.findByNomCatIgnoreCase(nameCat))) throw new RessourseNotFounfException("Liste vide");
+        return categoryRepository.findByNomCatIgnoreCase(nameCat);
+    }
+
+    @Override
+    public List<Categorie> getCatByNameContaining(String nameCat) throws RessourseNotFounfException {
+        if (ObjectUtils.isEmpty(categoryRepository.findByNomCatContaining(nameCat))) throw new RessourseNotFounfException("Liste vide");
+        return categoryRepository.findByNomCatContaining(nameCat);
     }
 
 

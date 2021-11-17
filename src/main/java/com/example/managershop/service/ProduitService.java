@@ -23,4 +23,5 @@ public interface ProduitService {
     public Collection<Produit> getAllProductByCategory(String idCat) throws RessourseNotFounfException;
     public List<Produit> getProductByCategorie1(String idcat) throws RessourseNotFounfException;
     public void payerPduit(String idPdt , double qtePdruitPaye);
+    public Double CommaderPrduits (List<Produit> produits);
 }

@@ -1,6 +1,8 @@
 package com.example.managershop.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,8 +12,7 @@ import java.util.Collection;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Fournisseur {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFsseur;
+    private String idFsseur;
     private String nameFsseur;
     private String phoneFsseur;
     private String addresseFsseur;

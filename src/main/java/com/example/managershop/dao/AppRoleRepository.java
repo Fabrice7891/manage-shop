@@ -17,7 +17,6 @@ public interface AppRoleRepository extends JpaRepository<AppRole, String> {
             value = "SELECT * FROM APP_ROLE r ORDER BY r.ROLENAME ASC",
             nativeQuery = true)
     public Collection<AppRole> getALLRolleShorted();
-    //public Collection<AppRole> findBy
-
     public AppRole findByIdRole(String idrole);
+
 }

@@ -14,4 +14,10 @@ public interface CategoryRepository extends JpaRepository<Categorie, String> {
 
     @Query("SELECT c FROM Categorie c WHERE c.nomCat LIKE %?1%")
     public List<Categorie> findAll(String keyword);
+
+    public List<Categorie> findByNomCatIgnoreCase(String nameCta);
+
+    @Query("SELECT c FROM Categorie c WHERE c.nomCat LIKE %?1%")
+    public List<Categorie> findByNomCatContaining(String nameCta);
+
 }

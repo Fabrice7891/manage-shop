@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -21,9 +24,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackageClasses = {CategorieService.class , CategoryRepository.class})
+@EnableEurekaClient
+//@EnableJpaRepositories(basePackageClasses = {CategorieService.class , CategoryRepository.class})
 //@EnableSwagger2
-public class ManagerShopApplication //implements CommandLineRunner
+public class ManagerShopApplication /*extends SpringBootServletInitializer*///implements CommandLineRunner
 {
      private static final Logger LOGGER= LoggerFactory.getLogger(ManagerShopApplication.class);
 
@@ -31,6 +35,11 @@ public class ManagerShopApplication //implements CommandLineRunner
 		SpringApplication.run(ManagerShopApplication.class, args);
 		LOGGER.info(" Application Started  !!!!! You can use it !!");
 	}
+
+	/*@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(ManagerShopApplication.class);
+	}*/
 
 
 	@Bean

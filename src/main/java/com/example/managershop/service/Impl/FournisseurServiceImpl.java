@@ -1,6 +1,7 @@
 package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.FounisseurRepository;
+import com.example.managershop.dto.CategorieDto;
 import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.dto.Map.MapperEntities;
 import com.example.managershop.entities.Fournisseur;
@@ -31,7 +32,7 @@ public class FournisseurServiceImpl implements FournisseurService {
         || fournisseurDto.getPaysFsseur().equals(null)
         || fournisseurDto.getVilleFsseur().equals(null)) throw new NullException("Must have a value");
         Fournisseur fournisseur=mapperEntities.FournisserDTOFournisseur(fournisseurDto);
-        //fournisseur.setIdFsseur(UUID.randomUUID().toString());
+        fournisseur.setIdFsseur(UUID.randomUUID().toString());
         founisseurRepository.save(fournisseur);
         return fournisseur;
     }
@@ -42,14 +43,14 @@ public class FournisseurServiceImpl implements FournisseurService {
     }
 
     @Override
-    public Fournisseur getFsseurById(Long idfsseur) throws RessourseNotFounfException {
+    public Fournisseur getFsseurById(String idfsseur) throws RessourseNotFounfException {
         if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
                 RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
         return founisseurRepository.findById(idfsseur).get();
     }
 
     @Override
-    public Fournisseur deleteFsseur(Long idfsseur) throws RessourseNotFounfException {
+    public Fournisseur deleteFsseur(String idfsseur) throws RessourseNotFounfException {
         if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
                 RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
         Fournisseur fournisseur=founisseurRepository.findById(idfsseur).get();
@@ -58,7 +59,16 @@ public class FournisseurServiceImpl implements FournisseurService {
     }
 
     @Override
-    public List<Produit> livrerProduit(Long idfsseur, Long idPdt) {
+    public List<Produit> livrerProduit(String idfsseur, Long idPdt) {
         return null;
+    }
+
+    @Override
+    public FournisseurDto updateFounissueur(String idFsseur, FournisseurDto newFournisseur) throws RessourseNotFounfException {
+         Fournisseur fournisseur=mapperEntities.FournisseurDTOFournisseur(newFournisseur);
+        if(!founisseurRepository.findById(idFsseur).isPresent()) throw new RessourseNotFounfException("Fournisseur With id :"+idFsseur+" not found");
+        fournisseur.setIdFsseur(idFsseur);
+        founisseurRepository.save(fournisseur);
+        return mapperEntities.FournisseurToFournisseurDTO(fournisseur);
     }
 }
