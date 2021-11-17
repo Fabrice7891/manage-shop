@@ -1,7 +1,6 @@
 package com.example.managershop.service.Impl;
 
 import com.example.managershop.dao.FounisseurRepository;
-import com.example.managershop.dto.CategorieDto;
 import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.dto.Map.MapperEntities;
 import com.example.managershop.entities.Fournisseur;
@@ -64,11 +63,20 @@ public class FournisseurServiceImpl implements FournisseurService {
     }
 
     @Override
-    public FournisseurDto updateFounissueur(String idFsseur, FournisseurDto newFournisseur) throws RessourseNotFounfException {
-         Fournisseur fournisseur=mapperEntities.FournisseurDTOFournisseur(newFournisseur);
-        if(!founisseurRepository.findById(idFsseur).isPresent()) throw new RessourseNotFounfException("Fournisseur With id :"+idFsseur+" not found");
-        fournisseur.setIdFsseur(idFsseur);
-        founisseurRepository.save(fournisseur);
-        return mapperEntities.FournisseurToFournisseurDTO(fournisseur);
+    public FournisseurDto updateFounissueur(String idfseur, FournisseurDto newFournisseur) throws RessourseNotFounfException {
+
+        if(!founisseurRepository.findById(idfseur).isPresent()) throw new
+                RessourseNotFounfException("Fournisseur With id :"+idfseur+" not found");
+
+        Fournisseur fournisseur=mapperEntities.FournisseurDTOFournisseur(newFournisseur);
+        Fournisseur fournisseur1=founisseurRepository.findById(idfseur).get();
+        fournisseur1.setPhoneFsseur(fournisseur.getPhoneFsseur());
+        fournisseur1.setPaysFsseur(fournisseur.getPaysFsseur());
+        fournisseur1.setNameFsseur(fournisseur.getNameFsseur());
+        fournisseur1.setEmailFsseur(fournisseur.getEmailFsseur());
+        fournisseur1.setVilleFsseur(fournisseur.getVilleFsseur());
+        fournisseur1.setAddresseFsseur(fournisseur.getAddresseFsseur());
+        founisseurRepository.save(fournisseur1);
+        return mapperEntities.FournisseurToFournisseurDTO(fournisseur1);
     }
 }

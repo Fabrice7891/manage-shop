@@ -17,7 +17,7 @@ import java.util.Collection;
 public class FournisseurDto {
 
     @JsonIgnore
-    private Long idFsseur;
+    private String idFsseur;
     @NotNull
     private String nameFsseur;
     @NotNull
