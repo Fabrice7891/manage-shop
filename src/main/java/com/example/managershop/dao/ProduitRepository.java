@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface ProduitRepository extends JpaRepository<Produit, String> {
 
+
     @Query("SELECT p FROM Produit p WHERE p.nomPdt LIKE %?1%")
     public List<Produit> searchPdtByKeyword(String keyword);
     public List<Produit> findByCategorie(Categorie categorie);

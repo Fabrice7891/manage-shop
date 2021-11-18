@@ -75,10 +75,11 @@ public class CategorieController {
     }
 
     @GetMapping("/page/{pageNo}")
-    public ResponseEntity<Page<Categorie>> getAllCategoriesPagined(@PathVariable("pageNo") int pageNo
-    , @RequestParam ("sortField") String sortField
-            ,@RequestParam("sortDirec") String sortDirec) {
-        int size=3;
+    public ResponseEntity<Page<Categorie>> getAllCategoriesPagined(
+            @PathVariable("pageNo") int pageNo,
+            @RequestParam ("sortField") String sortField,
+            @RequestParam("sortDirec") String sortDirec,
+            @RequestParam("size") int size ) {
         return new ResponseEntity<>(categorieService.listePaginedCategorie(pageNo, size,sortField,sortDirec), HttpStatus.OK);
     }
 
@@ -104,5 +105,17 @@ public class CategorieController {
     @GetMapping("/products/{idCat}")
     public ResponseEntity<Collection<Produit>> getAllPdtByCategorie(@PathVariable String idCat) throws RessourseNotFounfException {
         return new ResponseEntity<>(categorieService.getProductByCategorie(idCat), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/products")
+    public ResponseEntity<List<Categorie>> getCatByNameIgnoreCase(@RequestParam String nameCat) throws RessourseNotFounfException {
+        return new ResponseEntity<>(categorieService.getCatByNameIgnoreCase(nameCat), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/productsContain")
+    public ResponseEntity<List<Categorie>> getCatByNamcatContaining(@RequestParam String nameCat) throws RessourseNotFounfException {
+        return new ResponseEntity<>(categorieService.getCatByNameContaining(nameCat), HttpStatus.OK);
     }
 }

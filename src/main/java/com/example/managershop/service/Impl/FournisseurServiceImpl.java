@@ -31,7 +31,7 @@ public class FournisseurServiceImpl implements FournisseurService {
         || fournisseurDto.getPaysFsseur().equals(null)
         || fournisseurDto.getVilleFsseur().equals(null)) throw new NullException("Must have a value");
         Fournisseur fournisseur=mapperEntities.FournisserDTOFournisseur(fournisseurDto);
-        //fournisseur.setIdFsseur(UUID.randomUUID().toString());
+        fournisseur.setIdFsseur(UUID.randomUUID().toString());
         founisseurRepository.save(fournisseur);
         return fournisseur;
     }
@@ -42,14 +42,14 @@ public class FournisseurServiceImpl implements FournisseurService {
     }
 
     @Override
-    public Fournisseur getFsseurById(Long idfsseur) throws RessourseNotFounfException {
+    public Fournisseur getFsseurById(String idfsseur) throws RessourseNotFounfException {
         if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
                 RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
         return founisseurRepository.findById(idfsseur).get();
     }
 
     @Override
-    public Fournisseur deleteFsseur(Long idfsseur) throws RessourseNotFounfException {
+    public Fournisseur deleteFsseur(String idfsseur) throws RessourseNotFounfException {
         if(!founisseurRepository.findById(idfsseur).isPresent()) throw new
                 RessourseNotFounfException("Fournisseur With id :"+idfsseur+" not found");
         Fournisseur fournisseur=founisseurRepository.findById(idfsseur).get();
@@ -58,7 +58,18 @@ public class FournisseurServiceImpl implements FournisseurService {
     }
 
     @Override
-    public List<Produit> livrerProduit(Long idfsseur, Long idPdt) {
+    public List<Produit> livrerProduit(String idfsseur, Long idPdt) {
         return null;
+    }
+
+    @Override
+    public FournisseurDto updateFounissueur(String idfseur, FournisseurDto newFournisseur) throws RessourseNotFounfException {
+        if(!founisseurRepository.findById(idfseur).isPresent()) throw new
+                RessourseNotFounfException("Fournisseur With id :"+idfseur+" not found");
+
+        Fournisseur fournisseur=mapperEntities.FournisseurDTOFournisseur(newFournisseur);
+        fournisseur.setIdFsseur(idfseur);
+        founisseurRepository.save(fournisseur);
+        return mapperEntities.FournisseurToFournisseurDTO(fournisseur);
     }
 }

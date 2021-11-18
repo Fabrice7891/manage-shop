@@ -29,9 +29,7 @@ public class Categorie {
     @JsonIgnore
     private Collection<Produit> produits= new ArrayList<>();
 
-    /*public Categorie() {
-    }
-*/
+
     public Categorie(String idCat, String nomCat) {
         this.idCat = idCat;
         this.nomCat = nomCat;

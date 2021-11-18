@@ -4,6 +4,7 @@ import com.example.managershop.dto.CategorieDto;
 import com.example.managershop.dto.FournisseurDto;
 import com.example.managershop.entities.Categorie;
 import com.example.managershop.entities.Fournisseur;
+import com.example.managershop.exception.CategorieNotFoundException;
 import com.example.managershop.exception.NullException;
 import com.example.managershop.exception.RessourseNotFounfException;
 import com.example.managershop.service.FournisseurService;
@@ -31,7 +32,7 @@ public class FournisseurController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Delete a Fournisseur")
-    public ResponseEntity<Fournisseur> deleteFornisseur(@PathVariable("id") Long idfsseur) throws NullException, RessourseNotFounfException {
+    public ResponseEntity<Fournisseur> deleteFornisseur(@PathVariable("id") String idfsseur) throws NullException, RessourseNotFounfException {
         return new ResponseEntity<>(fournisseurService.deleteFsseur(idfsseur), HttpStatus.OK);
     }
 
@@ -40,5 +41,9 @@ public class FournisseurController {
         return new ResponseEntity<>(fournisseurService.getAllFsseur(), HttpStatus.OK);
     }
 
-
+    @PutMapping("/{id}")
+        public ResponseEntity<FournisseurDto> updateFnisseur
+            (@PathVariable("id") String id, @Valid @RequestBody FournisseurDto fournisseurDto) throws  RessourseNotFounfException {
+        return new ResponseEntity<>(fournisseurService.updateFounissueur(id, fournisseurDto), HttpStatus.OK);
+    }
 }

@@ -23,5 +23,8 @@ public interface MapperEntities {
 
     public AppRole AppRoleDTOAppRole(AppRoleDto appRoleDto);
     public AppRoleDto AppRoleToAppRoleDTO(AppRole appRole);
+
+    public Fournisseur FournisseurDTOFournisseur(FournisseurDto fournisseurDto);
+    public FournisseurDto FournisseurToFournisseurDTO(Fournisseur fournisseur);
 }
 

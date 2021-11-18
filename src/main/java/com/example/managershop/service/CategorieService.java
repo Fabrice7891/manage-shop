@@ -25,7 +25,7 @@ public interface CategorieService {
     public Categorie deleteProductToCategorie(List<Produit> produits , String idCat);
     public Collection<Produit> getProductByCategorie(String idCat) throws RessourseNotFounfException;
     public Page<Categorie> listePaginedCategorie(int page, int size, String sortfield, String SortDirection);
-
-
+    public List<Categorie> getCatByNameIgnoreCase(String nameCat) throws RessourseNotFounfException;
+    public List<Categorie> getCatByNameContaining(String nameCat) throws RessourseNotFounfException;
 
 }

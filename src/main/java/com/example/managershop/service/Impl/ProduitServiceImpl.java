@@ -104,4 +104,9 @@ public class ProduitServiceImpl implements ProduitService {
 
     }
 
+    @Override
+    public Double CommaderPrduits(List<Produit> produits) {
+        return null;
+    }
+
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,12 +17,13 @@ import java.util.Collection;
 public class FournisseurDto {
 
     @JsonIgnore
-    private Long idFsseur;
+    private String idFsseur;
     @NotNull
     private String nameFsseur;
     @NotNull
     private String phoneFsseur;
     private String addresseFsseur;
+    //@Email
     private String emailFsseur;
     private String villeFsseur;
     private String paysFsseur;
